@@ -1,0 +1,68 @@
+ID: 914
+Units: 842
+Price: 12.95
+Description: Blue widget used for powering devices.
+TaxExempt: False 
+
+ID: 915
+Units: 416
+Price: 14.95
+Description: Red widget used for powering devices.
+TaxExempt: True
+
+ID: 916
+Units: 127
+Price: 18.95
+Description: Green widget used for powering devices.
+TaxExempt: False
+
+ID: 917
+Units: 514
+Price: 16.95
+Description: Purple widget used for powering devices.
+TaxExempt: True
+
+ID: 918
+Units: 437
+Price: 21.95
+Description: Yellow widget used for powering devices.
+TaxExempt: False
+
+ID: 919
+Units: 269
+Price: 31.95
+Description: Orange widget used for powering devices.
+TaxExempt: True
+
+ID: 920
+Units: 97
+Price: 14.95
+Description: Pink widget used for powering devices.
+TaxExempt: False
+
+ID: 921
+Units: 492
+Price: 14.95
+Description: Brown widget used for powering devices.
+TaxExempt: True
+
+
+ID: 922
+Units: 212
+Price: 16.95
+Description: Black widget used for powering devices.
+TaxExempt: False
+
+ID: 923
+Units: 492
+Price: 24.95
+Description: White widget used for powering devices.
+TaxExempt: True
+
+
+ID: 924
+Units: 212
+Price: 18.95
+Description: Grey widget used for powering devices.
+TaxExempt: False
+

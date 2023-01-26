@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "c6481c0c-2426-4ad2-97ab-473778b90395": {
+      "ProjectGuid": "c6481c0c-2426-4ad2-97ab-473778b90395",
+      "DisplayName": "Lab2_Task3",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
