@@ -1,12 +1,2 @@
 ﻿  Distance.cpp
-C:\1 UC Files\4 Spring 2023\Data Structures\Lab 3\Lab3\Distance.cpp(25,22): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-C:\1 UC Files\4 Spring 2023\Data Structures\Lab 3\Lab3\Distance.cpp(66,22): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-C:\1 UC Files\4 Spring 2023\Data Structures\Lab 3\Lab3\Distance.cpp(88,22): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\1 UC Files\4 Spring 2023\Data Structures\Lab 3\Lab3\Distance.cpp(89,17): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-  Task4.cpp
-C:\1 UC Files\4 Spring 2023\Data Structures\Lab 3\Lab3\Task4.cpp(47,32): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\1 UC Files\4 Spring 2023\Data Structures\Lab 3\Lab3\Task4.cpp(47,28): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\1 UC Files\4 Spring 2023\Data Structures\Lab 3\Lab3\Task4.cpp(74,36): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\1 UC Files\4 Spring 2023\Data Structures\Lab 3\Lab3\Task4.cpp(74,32): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  Generating Code...
   Lab3.vcxproj -> C:\1 UC Files\4 Spring 2023\Data Structures\Lab 3\Lab3\x64\Debug\Lab3.exe

@@ -6,25 +6,25 @@ using namespace std;
 class Distance
 {
 private:
-    int Feet;
-    int Inches;
+    double Feet;
+    double Inches;
     double Meters;
 
 public:
     // Constructors / destructor
     Distance();             // Default Constructor
-    Distance(int f, int i); // Fill constructor for imperial units
+    Distance(double f, double i); // Fill constructor for imperial units
     Distance(double m);     // Fill constructor for metric units
     ~Distance();            // Destructor
 
     // Getters
-    int getFeet();
-    int getInches();
+    double getFeet();
+    double getInches();
     double getMeters();
 
     // Setters
-    void setFeet(int f);
-    void setInches(int i);
+    void setFeet(double f);
+    void setInches(double i);
     void setMeters(double m);
 
     // Other Member Functions
