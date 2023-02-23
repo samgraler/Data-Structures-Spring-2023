@@ -1,0 +1,5 @@
+This is the first line
+This is the second line with a period.
+this line wasn't captialized
+
+hello!

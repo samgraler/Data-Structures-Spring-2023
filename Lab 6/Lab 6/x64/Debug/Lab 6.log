@@ -1,0 +1,6 @@
+﻿  Queue.cpp
+  Stack.cpp
+  Task3.cpp
+C:\1 UC Files\4 Spring 2023\Data Structures\Lab 6\Task3.cpp(29,18): warning C4101: 'c': unreferenced local variable
+  Generating Code...
+  Lab 6.vcxproj -> C:\1 UC Files\4 Spring 2023\Data Structures\Lab 6\x64\Debug\Lab 6.exe
