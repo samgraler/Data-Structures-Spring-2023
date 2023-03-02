@@ -14,6 +14,8 @@ protected:
     T **PointerArray;
     int Size;
     int numItems;
+    int numComps;
+    int numMoves;
 
 public:
     // Constructor (Takes an invalue of type 'T')
@@ -22,11 +24,11 @@ public:
     virtual void addItem(T inval);
     virtual T removeItem(T n);
     virtual int FindItem(T val); // helper function to remove item
-
     bool isEmpty();
     bool isFull();
     virtual void MakeEmpty();
-    virtual string Print();
+    string Print();
+    string PrintStats();
 
 };
 

@@ -18,19 +18,20 @@ protected:
     int RightIndex;
     int LeftIndex;
     int numItems;
+    int numComps;
+    int numMoves;
 
 public:
     // Constructor (Takes an invalue of type 'T')
     MiddleOrderedList();
-
     void addItem(T inval);
     T removeItem(T n);
     int FindItem(T val); // helper function to remove item
-
     bool isEmpty();
     bool isFull();
     void MakeEmpty();
     string Print();
+    string PrintStats();
 };
 
 #endif

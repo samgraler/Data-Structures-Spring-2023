@@ -129,12 +129,14 @@
   <ItemGroup>
     <ClCompile Include="MiddleOrderedList.cpp" />
     <ClCompile Include="OrderedList.cpp" />
-    <ClCompile Include="Testing.cpp" />
+    <ClCompile Include="SpacedOrderedList.cpp" />
+    <ClCompile Include="Task4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListExceptions.h" />
     <ClInclude Include="MiddleOrderedList.h" />
     <ClInclude Include="OrderedList.h" />
+    <ClInclude Include="SpacedOrderedList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
