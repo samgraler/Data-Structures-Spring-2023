@@ -181,7 +181,8 @@ void SpacedOrderedList<T>::MakeEmpty()
     for (int i = 0; i < Size; i++)
     {
         PointerArray[i] = nullptr;
-    }    numItems = 0;
+    }    
+    numItems = 0;
 }
 
 template <class T>

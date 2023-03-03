@@ -51,7 +51,6 @@ void MiddleOrderedList<T>::addItem(T inval)
             numComps++;
             current--;
         }
-        cout << current << endl;
         if (PointerArray[current] == nullptr) // nullptr case
         {
             PointerArray[current] = new T(inval);
@@ -92,7 +91,6 @@ void MiddleOrderedList<T>::addItem(T inval)
             current++;
             numComps++;
         }
-        cout << current << endl;
         if (PointerArray[current] == nullptr) // nullptr case
         {
             PointerArray[current] = new T(inval);
@@ -114,7 +112,6 @@ void MiddleOrderedList<T>::addItem(T inval)
         }
         else // right shift case (room on right to shift)
         {
-            cout << "Thing3 to happen" << endl;
             for (int i = RightIndex; i > current; i--)
             {
                 PointerArray[i] = PointerArray[i - 1];
@@ -173,10 +170,10 @@ void MiddleOrderedList<T>::MakeEmpty()
     for (int i = 0; i < Size; i++)
     {
         PointerArray[i] = nullptr;
-        LeftIndex = MiddleIndex - 1;
-        RightIndex = MiddleIndex + 1;
-        numItems = 0;
     }
+    LeftIndex = MiddleIndex - 1;
+    RightIndex = MiddleIndex + 1;
+    numItems = 0;
 }
 
 template <class T>
@@ -197,7 +194,7 @@ int MiddleOrderedList<T>::FindItem(T val) // returns index of the value passed i
     else
     {
         numComps++;
-        for (int i = MiddleIndex; i > LeftIndex + 1; i--)
+        for (int i = MiddleIndex; i >= LeftIndex + 1; i--)
         {
             numComps++;
             if ((*PointerArray[i]) == val)
