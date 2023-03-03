@@ -11,8 +11,8 @@ MiddleOrderedList<T>::MiddleOrderedList()
     PointerArray = new T *[ARRAY_SIZE];
     Size = ARRAY_SIZE;
     MiddleIndex = (ARRAY_SIZE / 2);
-    RightIndex = (MiddleIndex + 1);
-    LeftIndex = (MiddleIndex - 1);
+    RightIndex = (MiddleIndex);
+    LeftIndex = (MiddleIndex);
     numItems = 0;
     numComps = 0;
     numMoves = 0;
@@ -37,12 +37,15 @@ void MiddleOrderedList<T>::addItem(T inval)
         PointerArray[MiddleIndex] = new T(inval);
         numItems++;
         numMoves++;
+        RightIndex++;
+        LeftIndex--;
         return;
     }
 
     int current = MiddleIndex;
     // left case
-    if (inval < (*PointerArray[MiddleIndex]))
+
+if (inval < (*PointerArray[MiddleIndex]))
     {
         numComps++;
         // find desired index
@@ -110,7 +113,7 @@ void MiddleOrderedList<T>::addItem(T inval)
             LeftIndex--;
             numMoves++;
         }
-        else // right shift case (room on right to shift)
+        else // (room on right to shift)
         {
             for (int i = RightIndex; i > current; i--)
             {
@@ -140,6 +143,17 @@ T MiddleOrderedList<T>::removeItem(T n)
     if (index > MiddleIndex)
     {
         numComps++;
+        for (int i = index; i < RightIndex; i++) // loop to shift other items left
+        {
+            PointerArray[i] = PointerArray[i + 1];
+            numMoves++;
+        }
+        RightIndex--;
+        PointerArray[RightIndex] = nullptr;
+        numMoves++;
+    }
+    else if (index < MiddleIndex)
+    {
         for (int i = index; i > LeftIndex; i--) // loop to shift other items right
         {
             PointerArray[i] = PointerArray[i - 1];
@@ -149,16 +163,54 @@ T MiddleOrderedList<T>::removeItem(T n)
         PointerArray[LeftIndex] = nullptr;
         numMoves++;
     }
-    else
+    else // remove middle case
     {
-        for (int i = index; i < RightIndex; i++) // loop to shift other items left
+        if (index >= MiddleIndex)
         {
-            PointerArray[i] = PointerArray[i + 1];
+            for (int i = index; i < RightIndex; i++) // loop to shift other items left
+            {
+                PointerArray[i] = PointerArray[i + 1];
+                numMoves++;
+            }
+            RightIndex--;
+            PointerArray[RightIndex] = nullptr;
             numMoves++;
         }
-        RightIndex--;
-        PointerArray[RightIndex] = nullptr;
-        numMoves++;
+        else
+        {
+            for (int i = index; i > LeftIndex; i--) // loop to shift other items right
+            {
+                PointerArray[i] = PointerArray[i - 1];
+                numMoves++;
+            }
+            LeftIndex++;
+            PointerArray[LeftIndex] = nullptr;
+            numMoves++;
+        }
+        if (!isEmpty() && RightIndex == MiddleIndex)
+        {
+            for (int i = MiddleIndex; i > LeftIndex; i--) // loop to shift other items right
+            {
+                PointerArray[i] = PointerArray[i - 1];
+                numMoves++;
+            }
+            LeftIndex++;
+            RightIndex++;
+            PointerArray[LeftIndex] = nullptr;
+            numMoves++;
+        }
+        else if (!isEmpty() && LeftIndex == MiddleIndex)
+        {
+            for (int i = MiddleIndex; i < RightIndex; i++) // loop to shift other items left
+            {
+                PointerArray[i] = PointerArray[i + 1];
+                numMoves++;
+            }
+            RightIndex--;
+            LeftIndex--;
+            PointerArray[RightIndex] = nullptr;
+            numMoves++;
+        }
     }
     numItems--;
     return retval;

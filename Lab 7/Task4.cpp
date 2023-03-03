@@ -14,6 +14,7 @@ using namespace std;
 
 int main()
 {
+    srand((unsigned)time(NULL));
     /*
     int number = 1;
     int ans = 1;
@@ -48,9 +49,9 @@ int main()
         cout << "> ";
         cin >> ans;
         cout << endl;
-    }*/
+    } */
 
-
+    
     vector<int> rVector = {};
     vector<int> eVector = {};
     MiddleOrderedList<int> MList = MiddleOrderedList<int>();
@@ -72,7 +73,7 @@ int main()
         {
             if (!eVector.empty()) // erase vector (things to remove)
             {
-                if (((rand() % 1)) == 1 && !rVector.empty())
+                if (((rand() % 20)+1) > 10 && !rVector.empty())
                 { // Add Item Case
                     numCheck = (rand() % rVector.size());
                     OList.addItem(rVector[numCheck]);
@@ -118,5 +119,5 @@ int main()
          << endl;
     cout << "SpacedOrderedList Stats: " << endl;
     cout << SList.PrintStats() << endl
-         << endl;
-}
+         << endl; 
+} 
