@@ -121,6 +121,13 @@ void Part::Display() {
 }
 
 // function we found that creates ascii art for a string input
+
+// Lord Hypersonic
+// February 01, 2019
+// ASCII Art Generator
+// Code version: 1.0
+// Source Code
+// URL: https://lordhypersonic.blogspot.com/2019/02/c-ascii-art-generator.html
 void Part::ascii_art(string input) {
     for (int i = 0; i < input.size(); i++)
     {

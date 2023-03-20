@@ -91,13 +91,15 @@ T* LinkedList<T>::GetItem(T* item)
             length--;
             return(ret);
         }
-        if (temp == current)
-        {
-            current = temp->next;
-        }
+
         if (temp->next != nullptr) {
             head = temp->next;
             head->prev = nullptr;
+        }
+
+        if (temp == current)
+        {
+            current = temp->next;
         }
     }
     else if (temp->next == nullptr)
@@ -166,7 +168,7 @@ T* LinkedList<T>::SeeNext()
     if (isEmpty()) {
         throw EmptyListException();
     }
-    if (current->next == nullptr || current == nullptr)
+    if (current == nullptr || current->next == nullptr)
     {
         current = nullptr;
         return nullptr;
@@ -181,7 +183,7 @@ T* LinkedList<T>::SeePrev()
     if (isEmpty()) {
         throw EmptyListException();
     }
-    if (current->prev == nullptr || current == nullptr)
+    if (current == nullptr || current->prev == nullptr)
     {
         current = nullptr;
         return nullptr;
