@@ -48,9 +48,11 @@ public:
     void InOrder(Node<T> *troot);
 
     // Methods for Balancing
-    int Height(Node<T> *current);
+    int Height(Node<T> *current, Node<T> *parent);
     void RotateLeft(Node<T> *parent, Node<T> *pivot);
     void RotateRight(Node<T> *parent, Node<T> *pivot);
+    void RotateLeftRight(Node<T>* parent, Node<T>* pivot);
+    void RotateRightLeft(Node<T>* parent, Node<T>* pivot);
 
     bool isEmpty();
     Node<T>* getRoot();

@@ -357,24 +357,24 @@ void BST<T>::InOrder(Node<T> *troot) // function to traverse tree and insert nod
 // Methods for Rotation
 
 template <class T>
-int BST<T>::Height(Node<T> *current)
+int BST<T>::Height(Node<T> *current, Node<T> *parent)
 {
     // base case
     if (current == nullptr)
     {
         return 0;
     }
-    int L = Height(current->left);
-    int R = Height(current->right);
+    int L = Height(current->left, current);
+    int R = Height(current->right, current);
 
     // logic to know when to rotate
     if (L-R >= 2){
-        RotateRight(current, current->left);
+        RotateRight(parent, current);
         L--;
         R++;
     }
     else if(L-R <= -2){
-        RotateLeft(current, current->right);
+        RotateLeft(parent, current);
         L++;
         R--;
     }
@@ -432,6 +432,64 @@ void BST<T>::RotateRight(Node<T> *parent, Node<T> *pivot) // inverse of what was
         parent->right->right = pivot;
     }
 }
+
+template <class T>
+void BST<T>::RotateRightLeft(Node<T> *parent, Node<T> *pivot)
+{
+    if (pivot == root) // NOT DONE IN CLASS
+    {
+        root = pivot->right->left;
+        pivot->right->left = root->right;
+        root->right = pivot->right;
+        pivot->right = root->left;
+        root->left = pivot;
+    }
+    else if (pivot == parent->left) // pivot is left child of parent (in class)
+    {
+        parent->left = pivot->right->left; // start of case where pivot is the left of parent
+        pivot->right->left = parent->left->right;
+
+        parent->left->right = pivot->right;
+        pivot->right = parent->left->left;
+
+        parent->left->left = pivot;
+    }
+    else // pivot is right child of parent
+    {
+        parent->right = pivot->right->left; // start of case where pivot is the left of parent
+        pivot->right->left = parent->right->right;
+
+        parent->right->right = pivot->right;
+        pivot->right = parent->right->left;
+
+        parent->right->left = pivot;
+    }
+}
+
+
+template <class T>
+void BST<T>::RotateLeftRight(Node<T> *parent, Node<T> *pivot)
+{
+    if (pivot == root) // pivot is root (in class)
+    {
+        root = pivot->left->right;
+        pivot->left->right = root->left;
+        root->left = pivot->left;
+        pivot->left = root->right;
+        root->right = pivot;
+    }
+    else if (pivot == parent->left) // pivot is left child of parent
+    {
+
+    }
+    else // pivot is right child of parent
+    {
+
+    }
+}
+
+
+
 
 // template <class T>
 // void BST<T>::Flatten(Node<T> &troot)
