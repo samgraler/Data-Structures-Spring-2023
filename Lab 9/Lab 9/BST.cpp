@@ -234,7 +234,7 @@ T BST<T>::Remove(T key)
             to_delete = temp->right;
             if ((to_delete)->left != nullptr)
             { // to_delete has left child
-                temp->left = to_delete->left;
+                temp->right = to_delete->left;
                 retval = to_delete->data;
                 to_delete->left = nullptr;
                 to_delete->right = nullptr;
@@ -242,7 +242,7 @@ T BST<T>::Remove(T key)
             }
             else
             { // to_delete has right child
-                temp->left = to_delete->right;
+                temp->right = to_delete->right;
                 retval = to_delete->data;
                 to_delete->left = nullptr;
                 to_delete->right = nullptr;
