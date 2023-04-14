@@ -11,7 +11,35 @@ using namespace std;
 
 vector<int> vect;
 
-void MakeRandomVector()
+// the functions below are used to print the binary tree. the call looks like this: printBT(treename->getRoot());
+
+// <Schneider, Adrian> (<03/29/2023>) <Print Binary Tree> (1.0) [Source Code] https://stackoverflow.com/questions/36802354/print-binary-tree-in-a-pretty-way-using-c
+// The above statement applies for the next 2 functions 
+template <class T>
+void printBT(const std::string& prefix, const Node<T>* node, bool isLeft)
+{
+    if (node != nullptr)
+    {
+        std::cout << prefix;
+
+        std::cout << (isLeft ? "|--" : "'--");
+
+        // print the value of the node
+        std::cout << node->data << std::endl;
+
+        // enter the next tree level - left and right branch
+        printBT(prefix + (isLeft ? "|   " : "    "), node->right, true);
+        printBT(prefix + (isLeft ? "|   " : "    "), node->left, false);
+    }
+}
+
+template <class T>
+void printBT(const Node<T>* node)
+{
+    printBT("", node, false);
+}
+
+void MakeRandomVector() // creates a vector of 100 random numbers
 {
     srand(time(NULL));
     while (vect.size() < 101)
@@ -25,7 +53,7 @@ void MakeRandomVector()
     }
 }
 
-void showMenu()
+void showMenu() // shows menu options
 {
     cout << endl;
     cout << "0: Exit Testing" << endl;
@@ -35,7 +63,7 @@ void showMenu()
     cout << "4: Print()" << endl;
 }
 
-int getInt()
+int getInt() // gets an integer from the user (for the individual testing  of each data structure)
 {
     int i = 0;
     cout << "Enter the value: " << endl;
@@ -44,11 +72,11 @@ int getInt()
     return (i);
 }
 
-int BinaryChecks, HashChecks, Hash2Checks, TBinaryChecks, THashChecks, THash2Checks; // global check variables
+int BinaryChecks, HashChecks, Hash2Checks, TBinaryChecks, THashChecks, THash2Checks; // global variables to keep track of checks
 
-void UpdateChecks(BST<int>* t)
+void UpdateChecks(BST<int>* t) // updates checks for each data structure
 {
-    BinaryChecks = t->getChecks();
+    BinaryChecks = t->getChecks(); // gets checks from binary tree
 
     TBinaryChecks += BinaryChecks;
     THashChecks += HashChecks;
@@ -59,14 +87,14 @@ void UpdateChecks(BST<int>* t)
     cout << "2D Hash Table Checks: " << Hash2Checks << endl;
 
     BinaryChecks = 0;
-    t->ResetChecks();
+    t->ResetChecks(); // resets checks for binary tree
     HashChecks = 0;
     Hash2Checks = 0;
 }
 
-int main()
+int main() // main function
 {
-    system("Color 0A");
+    system("Color 0A"); // changes color of console
 
     //initializes list of random items for all 3 data structures
     MakeRandomVector();
@@ -86,7 +114,6 @@ int main()
     BinaryChecks = HashChecks = Hash2Checks = TBinaryChecks = THashChecks = THash2Checks = 0;
 
     // insert first 50
-
     for (int x = 0; x < 50; x++) {
         HashChecks += hash->Insert(new int(sub1[x]));
         Hash2Checks += hash2->Insert(sub1[x]);
@@ -138,15 +165,6 @@ int main()
 
     return 0;
 }
-
-
-
-
-
-
-
-
-
 
 /*
 int main()

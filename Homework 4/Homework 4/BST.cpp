@@ -7,19 +7,19 @@
 using namespace std;
 
 template <class T>
-BST<T>::BST()
+BST<T>::BST() // constructor
 {
     root = nullptr;
     size = 0;
 }
 
 template <class T>
-BST<T>::~BST()
+BST<T>::~BST() // destructor
 {
 }
 
 template <class T>
-bool BST<T>::isEmpty()
+bool BST<T>::isEmpty() // returns true if tree is empty
 {
     if (this->size == 0)
     {
@@ -29,13 +29,13 @@ bool BST<T>::isEmpty()
 }
 
 template <class T>
-Node<T> *BST<T>::getRoot()
+Node<T> *BST<T>::getRoot() // returns root of tree
 {
     return (root);
 }
 
 template <class T>
-void BST<T>::Insert(T inVal)
+void BST<T>::Insert(T inVal) // inserts a node into the tree
 {
     if (root == nullptr)
     {
@@ -296,7 +296,7 @@ T BST<T>::Remove(T key)
 }
 
 template <class T>
-T BST<T>::FindSmallestLarger(Node<T> *temp)
+T BST<T>::FindSmallestLarger(Node<T> *temp) 
 {
     while (temp->left != nullptr)
     {
@@ -306,7 +306,7 @@ T BST<T>::FindSmallestLarger(Node<T> *temp)
 }
 
 template <class T>
-T BST<T>::FindLargestSmaller(Node<T> *temp)
+T BST<T>::FindLargestSmaller(Node<T> *temp) 
 {
     while (temp->right != nullptr)
     {
@@ -316,7 +316,7 @@ T BST<T>::FindLargestSmaller(Node<T> *temp)
 }
 
 template <class T>
-void BST<T>::Print(Node<T> *toprint) // method was written in class (might work but is not necessary for lab)
+void BST<T>::Print(Node<T> *toprint) // prints the tree in a readable format
 {
     if (toprint == nullptr)
     {
@@ -343,7 +343,7 @@ void BST<T>::Print(Node<T> *toprint) // method was written in class (might work 
 }
 
 template <class T>
-void BST<T>::PrintVect(vector<T> vects)
+void BST<T>::PrintVect(vector<T> vects) // prints a vector of type T
 {
     for (int i = 0; i < vects.size(); i++)
     {
@@ -352,13 +352,13 @@ void BST<T>::PrintVect(vector<T> vects)
 }
 
 template <class T>
-int BST<T>::getSize()
+int BST<T>::getSize() // returns the size of the tree
 {
     return (size);
 }
 
 template <class T>
-vector<T> BST<T>::GetAllAscending()
+vector<T> BST<T>::GetAllAscending() // returns a vector of all the nodes in the tree in ascending order
 {
     vect.clear();
     InOrder(root);
@@ -366,7 +366,7 @@ vector<T> BST<T>::GetAllAscending()
 }
 
 template <class T>
-vector<T> BST<T>::GetAllDescending()
+vector<T> BST<T>::GetAllDescending() // returns a vector of all the nodes in the tree in descending order
 {
     vect.clear();
     InOrder(root);
@@ -395,12 +395,10 @@ void BST<T>::InOrder(Node<T> *troot) // function to traverse tree and insert nod
 }
 
 // Methods for Rotation
-
 template <class T>
-int BST<T>::Height(Node<T> *current, Node<T> *parent)
+int BST<T>::Height(Node<T> *current, Node<T> *parent) // returns the height of the tree
 {
-    // base case
-    if (current == nullptr)
+    if (current == nullptr) // if current is null, return 0
     {
         return 0;
     }
@@ -408,31 +406,30 @@ int BST<T>::Height(Node<T> *current, Node<T> *parent)
     int L = Height(current->left, current);
     int R = Height(current->right, current);
 
-    // logic to know when to rotate
-    if (L - R >= 2)
+    if (L - R >= 2) // if the left subtree is too tall
     {
-        if (current->left->left != nullptr)
+        if (current->left->left != nullptr) // if the left subtree is too tall and the left child is the pivot
         {
             RotateRight(parent, current);
             L--;
             R++;
         }
-        else
+        else // if the left subtree is too tall and the right child is the pivot
         {
             RotateLeftRight(parent, current);
             L--;
             R++;
         }
     }
-    else if (L - R <= -2)
+    else if (L - R <= -2) // if the right subtree is too tall
     {
-        if (current->right->right != nullptr)
+        if (current->right->right != nullptr) // if the right subtree is too tall and the right child is the pivot
         {
             RotateLeft(parent, current);
             L++;
             R--;
         }
-        else
+        else // if the right subtree is too tall and the left child is the pivot
         {
             RotateRightLeft(parent, current);
             L++;
@@ -440,12 +437,11 @@ int BST<T>::Height(Node<T> *current, Node<T> *parent)
         }
     }
 
-    // more base cases
-    if (L > R)
+    if (L > R) // if the left subtree is taller
     {
         return L + 1;
     }
-    return R + 1;
+    return R + 1; // if the right subtree is taller
 }
 
 template <class T>
@@ -571,37 +567,3 @@ int BST<T>::getChecks()
 {
     return(checks);
 }
-
-
-// template <class T>
-// void BST<T>::Flatten(Node<T> &troot)
-// {
-//     // base condition- return if root is nullptr or if it is a
-//     // leaf node
-//     if (troot == nullptr || troot->left == nullptr && troot->right == nullptr)
-//         return;
-
-//     // if root->left exists then we have to make it
-//     // root->right
-//     if (troot->left != nullptr)
-//     {
-//         // move left recursively
-//         flatten(troot->left);
-//         // store the node root->right
-//         Node<T> *tmpRight = troot->right;
-//         troot->right = troot->left;
-//         delete troot->left;
-//         troot->left = nullptr;
-
-//         // find the position to insert the stored value
-//         Node<T> *NInsert = troot->right;
-//         while (NInsert->right != nullptr)
-//             NInsert = NInsert->right;
-
-//         // insert the stored value
-//         NInsert->right = tmpRight;
-//     }
-//     // now call the same function for root->right
-//     flatten(troot->right);
-// }
-

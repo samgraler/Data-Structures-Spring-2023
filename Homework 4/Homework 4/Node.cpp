@@ -13,7 +13,7 @@ Node<T>::Node()
 template <class T>
 Node<T>::Node(T inval)
 {
-    data = inval; // remember to delete in destructor
+    data = inval;
     right = nullptr;
     left = nullptr;
 }

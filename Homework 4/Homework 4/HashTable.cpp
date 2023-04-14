@@ -62,14 +62,14 @@ int HashTable<T>::Find(T *key)
     }
     int checks = 1;
     int index = Hash(*key);
-    while ((arr[index] != nullptr && *arr[index] != *key) || (deleted[index] == true))
+    while ((arr[index] != nullptr && *arr[index] != *key) || (deleted[index] == true)) // if the index is not null and the value at the index is not equal to the key or the index is deleted
     {
         index = (index + 1) % MAX_SIZE;
         checks++;
     }
     if (arr[index] == nullptr)
     {
-        throw ItemNotFoundException(checks);
+        throw ItemNotFoundException(checks); // pass checks to exception even if the item isn't found
     }
     return checks;
 }
@@ -90,7 +90,7 @@ int HashTable<T>::Remove(T *key)
     }
     if (arr[index] == nullptr)
     {
-        throw ItemNotFoundException(checks);
+        throw ItemNotFoundException(checks); // pass checks to exception even if the item isn't found
     }
     delete arr[index];
     arr[index] = nullptr;
@@ -100,7 +100,7 @@ int HashTable<T>::Remove(T *key)
 }
 
 template <class T>
-void HashTable<T>::Print()
+void HashTable<T>::Print() // prints the table
 {
     for (int i = 0; i < 10; i++)
     {

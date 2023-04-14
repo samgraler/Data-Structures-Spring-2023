@@ -25,42 +25,38 @@ public:
     // Destructor
     ~BST();
 
-    // Other methods
-    T *Find(T key);
-    void Find2(T key); // version of find to keep track of checks
+    T *Find(T key); // Find a node with a given key
+    void Find2(T key); // Find a node with a given key and increment checks
 
-    void Insert(T inVal);
+    void Insert(T inVal); // Insert a node with a given key
 
-    // Remove Function
-    T Remove(T key);
+    T Remove(T key); // Remove a node with a given key
 
-    // helper for remove
-    T FindSmallestLarger(Node<T> *temp);
-    T FindLargestSmaller(Node<T>* temp);
+    T FindSmallestLarger(Node<T> *temp); // Find the smallest larger node
+    T FindLargestSmaller(Node<T>* temp); // Find the largest smaller node
 
-    int getSize(); // Finished
+    int getSize(); // Get the size of the tree
 
-    vector<T> GetAllAscending();
-    vector<T> GetAllDescending();
-    void EmptyTree();
-    void Print(Node<T> *temp); 
-    void PrintVect(vector<T> vects);
+    vector<T> GetAllAscending(); // Get all the nodes in ascending order
+    vector<T> GetAllDescending(); // Get all the nodes in descending order
 
-    // void Flatten(Node<T> &troot);
-    void InOrder(Node<T> *troot);
+    void EmptyTree(); // Empty the tree
+    void Print(Node<T> *temp); // Print the tree
+    void PrintVect(vector<T> vects); // Print the vector
 
-    // Methods for Balancing
-    int Height(Node<T> *current, Node<T> *parent);
-    void RotateLeft(Node<T> *parent, Node<T> *pivot);
-    void RotateRight(Node<T> *parent, Node<T> *pivot);
-    void RotateLeftRight(Node<T>* parent, Node<T>* pivot);
-    void RotateRightLeft(Node<T>* parent, Node<T>* pivot);
+    void InOrder(Node<T> *troot); // In order traversal
 
-    bool isEmpty();
-    Node<T>* getRoot();
+    int Height(Node<T> *current, Node<T> *parent); // Get the height of the tree
+    void RotateLeft(Node<T> *parent, Node<T> *pivot); // Rotate left
+    void RotateRight(Node<T> *parent, Node<T> *pivot); // Rotate right
+    void RotateLeftRight(Node<T>* parent, Node<T>* pivot); // Rotate left right
+    void RotateRightLeft(Node<T>* parent, Node<T>* pivot); // Rotate right left
 
-    void ResetChecks();
-    int getChecks();
+    bool isEmpty(); // Check if the tree is empty
+    Node<T>* getRoot(); // Get the root of the tree
+
+    void ResetChecks(); // Reset the checks
+    int getChecks(); // Get the checks
 };
 
 #endif

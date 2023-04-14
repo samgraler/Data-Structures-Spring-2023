@@ -1,21 +1,21 @@
 ﻿  BST.cpp
-  HashTable.cpp
   HW4.cpp
-C:\1 UC Files\4 Spring 2023\Data Structures\Homework 4\HW4.cpp(16,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\1 UC Files\4 Spring 2023\Data Structures\Homework 4\BST.cpp(121,8): warning C4101: 'retval': unreferenced local variable
-C:\1 UC Files\4 Spring 2023\Data Structures\Homework 4\BST.cpp(115,1): message : while compiling class template member function 'void BST<int>::Find2(T)'
+C:\1 UC Files\4 Spring 2023\Data Structures\Homework 4\Homework 4\HW4.cpp(44,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\1 UC Files\4 Spring 2023\Data Structures\Homework 4\Homework 4\BST.cpp(121,8): warning C4101: 'retval': unreferenced local variable
+C:\1 UC Files\4 Spring 2023\Data Structures\Homework 4\Homework 4\BST.cpp(115,1): message : while compiling class template member function 'void BST<int>::Find2(T)'
           with
           [
               T=int
           ]
-C:\1 UC Files\4 Spring 2023\Data Structures\Homework 4\HW4.cpp(126,24): message : see reference to function template instantiation 'void BST<int>::Find2(T)' being compiled
+C:\1 UC Files\4 Spring 2023\Data Structures\Homework 4\Homework 4\HW4.cpp(153,24): message : see reference to function template instantiation 'void BST<int>::Find2(T)' being compiled
           with
           [
               T=int
           ]
-C:\1 UC Files\4 Spring 2023\Data Structures\Homework 4\HW4.cpp(51,21): message : see reference to class template instantiation 'BST<int>' being compiled
+C:\1 UC Files\4 Spring 2023\Data Structures\Homework 4\Homework 4\HW4.cpp(79,21): message : see reference to class template instantiation 'BST<int>' being compiled
+  HashTable.cpp
   Node.cpp
   TwoDHash.cpp
-C:\1 UC Files\4 Spring 2023\Data Structures\Homework 4\TwoDHash.cpp(29,20): warning C4154: deletion of an array expression; conversion to pointer supplied
+C:\1 UC Files\4 Spring 2023\Data Structures\Homework 4\Homework 4\TwoDHash.cpp(29,20): warning C4154: deletion of an array expression; conversion to pointer supplied
   Generating Code...
-  Homework 4.vcxproj -> C:\1 UC Files\4 Spring 2023\Data Structures\Homework 4\x64\Debug\Homework 4.exe
+  Homework 4.vcxproj -> C:\1 UC Files\4 Spring 2023\Data Structures\Homework 4\Homework 4\x64\Debug\Homework 4.exe

@@ -24,13 +24,13 @@ public:
     int Insert(T *inval);
     int Remove(T *key);
     int Find(T *key);
-    void Print();
+    void Print(); 
 
     // not needed for this assignment but present from previous project
     T *GetItem(T *key);
-    int GetLength();
-    bool isEmpty();
-    int getComps();
+    int GetLength(); // get number of items in the table
+    bool isEmpty(); // check if table is empty
+    int getComps(); // get number of comparisons
 };
 
 #endif

@@ -18,7 +18,7 @@ class ItemNotFoundException : public std::exception
 private:
     int c;
 public:
-    ItemNotFoundException(int c) : c(c) {}
+    ItemNotFoundException(int c) : c(c) {} // takes in an integer and sets it to the private variable c
     
     int what()
     {
