@@ -37,7 +37,7 @@ void TimeTaken(int *arr, int n, int sortType)
 		InsertionSort(arr, n);
 		break;
 	case 3:
-		QuickSort(arr, n - 1);
+		QuickSort(arr, n);
 		break;
 	case 4:
 		MergeSort(arr, 0, n - 1);
@@ -58,7 +58,6 @@ void TimeTaken(int *arr, int n, int sortType)
 
 int main()
 {
-
 	// initialize arrays to be sorted
 	int arr1[10];
 	int arr2[100];
@@ -96,65 +95,65 @@ int main()
 	}
 
 	// Bubble Sort Arrays and print time taken to sort each array
-	cout << "Bubble Sort:" << endl;
-	for (int i = 0; i < 6; i++)
-	{
-		cout << "Array " << i + 1 << ": ";
-		switch (i)
-		{
-		case 0:
-			TimeTaken(arr1, 10, 1);
-			break;
-		case 1:
-			TimeTaken(arr2, 100, 1);
-			break;
-		case 2:
-			TimeTaken(arr3, 500, 1);
-			break;
-		case 3:
-			TimeTaken(arr4, 5000, 1);
-			break;
-		case 4:
-			TimeTaken(arr5, 25000, 1);
-			break;
-		case 5:
-			TimeTaken(arr6, 100000, 1);
-			break;
-		default:
-			cout << "Invalid Array" << endl;
-			break;
-		}
-	}
+	// cout << "Bubble Sort:" << endl; // Finished Bubble Sort
+	// for (int i = 0; i < 6; i++)
+	// {
+	// 	cout << "Array " << i + 1 << ": ";
+	// 	switch (i)
+	// 	{
+	// 	case 0:
+	// 		TimeTaken(arr1, 10, 1);
+	// 		break;
+	// 	case 1:
+	// 		TimeTaken(arr2, 100, 1);
+	// 		break;
+	// 	case 2:
+	// 		TimeTaken(arr3, 500, 1);
+	// 		break;
+	// 	case 3:
+	// 		TimeTaken(arr4, 5000, 1);
+	// 		break;
+	// 	case 4:
+	// 		TimeTaken(arr5, 25000, 1);
+	// 		break;
+	// 	case 5:
+	// 		TimeTaken(arr6, 100000, 1);
+	// 		break;
+	// 	default:
+	// 		cout << "Invalid Array" << endl;
+	// 		break;
+	// 	}
+	// }
 
-	cout << "Insertion Sort:" << endl;
-	for (int i = 0; i < 6; i++)
-	{
-		cout << "Array " << i + 1 << ": ";
-		switch (i)
-		{
-		case 0:
-			TimeTaken(arr1, 10, 2);
-			break;
-		case 1:
-			TimeTaken(arr2, 100, 2);
-			break;
-		case 2:
-			TimeTaken(arr3, 500, 2);
-			break;
-		case 3:
-			TimeTaken(arr4, 5000, 2);
-			break;
-		case 4:
-			TimeTaken(arr5, 25000, 2);
-			break;
-		case 5:
-			TimeTaken(arr6, 100000, 2);
-			break;
-		default:
-			cout << "Invalid Array" << endl;
-			break;
-		}
-	}
+	// cout << "Insertion Sort:" << endl; // Finished Insertion Sort
+	// for (int i = 0; i < 6; i++) 
+	// {
+	// 	cout << "Array " << i + 1 << ": ";
+	// 	switch (i)
+	// 	{
+	// 	case 0:
+	// 		TimeTaken(arr1, 10, 2);
+	// 		break;
+	// 	case 1:
+	// 		TimeTaken(arr2, 100, 2);
+	// 		break;
+	// 	case 2:
+	// 		TimeTaken(arr3, 500, 2);
+	// 		break;
+	// 	case 3:
+	// 		TimeTaken(arr4, 5000, 2);
+	// 		break;
+	// 	case 4:
+	// 		TimeTaken(arr5, 25000, 2);
+	// 		break;
+	// 	case 5:
+	// 		TimeTaken(arr6, 100000, 2);
+	// 		break;
+	// 	default:
+	// 		cout << "Invalid Array" << endl;
+	// 		break;
+	// 	}
+	// }
 
 	cout << "Quick Sort:" << endl;
 	for (int i = 0; i < 1; i++)
