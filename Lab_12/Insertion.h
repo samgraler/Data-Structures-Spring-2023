@@ -1,3 +1,2 @@
-/* Insertion Sort Function Prototype
-*/
-void InsertionSort(int* arr, int n);
+/* Insertion Sort Function Prototype*/
+void InsertionSort(int *arr, int n);
