@@ -1,83 +1,37 @@
 #include "Quick.h"
 
-void QuickSort(int *arr, int n)
+void swap(int *arr, int i, int j) // utility function to swap two elements
 {
-	int pivot;
-	int fromleft = 0;
-	int fromright = n - 2;
-	int temp;
-	// base case
-	if (n <= 1)
-	{
-		return;
-	}
-	
-	if (arr[0] < arr[n - 1] && arr[0] > arr[n / 2])
-	{
-		pivot = 0;
-	}
-	else if (arr[n / 2] < arr[0] && arr[n / 2] > arr[n - 1])
-	{
-		pivot = n / 2;
-	}
-	else
-	{
-		pivot = n - 1;
-	}
-
-	// Put pivot at the end of the array
-	temp = arr[pivot];
-	arr[pivot] = arr[n-1];
-	arr[n-1] = temp;
-
-	while (fromleft < fromright)
-	{
-		while (arr[fromleft] < arr[n - 1])
-		{
-			fromleft++;
-		}
-		while (arr[fromright] > arr[n - 1])
-		{
-			fromright--;
-		}
-		if (fromleft < fromright)
-		{
-			temp = arr[fromleft];
-			arr[fromleft] = arr[fromright];
-			arr[fromright] = temp;
-		}
-	}
-	// swap fromleft and pivot
-	temp = arr[fromleft];
-	arr[fromleft] = arr[n - 1];
-	arr[n - 1] = temp;
-
-	// get sub arrays and call quicksort on them
-
-	// Left sub array
-	// make sure left sub array is not empty
-	if (fromleft > 0)
-	{
-		QuickSort(arr, fromleft);
-	}
-
-	// Right sub array
-	// make sure right sub array is not empty
-	if (fromleft < n - 1)
-	{
-		int* SubArray = new int[n - fromleft - 1]; // n - fromleft - 1 is the size of the right sub array
-
-		for (int i = fromleft + 1; i < (n - fromleft - 1); i++) // grab elements from main array
-		{
-			SubArray[i] = arr[i + fromleft + 1];
-		}
-
-		QuickSort(SubArray, n - fromleft - 1); // sort right sub array
-
-		for (int i = fromleft + 1; i < (n - fromleft - 1); i++) // replace elements in main array with sorted right sub array
-		{
-			arr[i + fromleft + 1] = SubArray[i];
-		}
-		delete[] SubArray; // clean up memory
-	}
+    int temp = arr[i];
+    arr[i] = arr[j]; // swap arr[i] and arr[j]
+    arr[j] = temp;
+}
+ 
+int partition(int* arr, int low, int high) // utility function to partition the array
+{
+    int pivot = arr[high]; // pivot
+ 
+    int i = (low - 1); // Index of smaller element
+ 
+    for (int j = low; j <= high - 1; j++) // loop through the array
+    {
+        if (arr[j] < pivot) // if current element is smaller than the pivot
+        {
+            i++;
+            swap(arr, i, j); // swap arr[i] and arr[j]
+        }
+    }
+    swap(arr, i + 1, high); // swap arr[i+1] and arr[high] (or pivot)
+    return (i + 1); // return the pivot index
+}
+ 
+void QuickSort(int* arr, int low, int high) // main function to sort the array
+{
+    if (low < high) // if the array has more than one element
+    {
+        int pi = partition(arr, low, high); // pi is partitioning index, arr[p] is now at right place
+ 
+        QuickSort(arr, low, pi - 1); // sort the elements before partition
+        QuickSort(arr, pi + 1, high); // sort the elements after partition
+    }
 }

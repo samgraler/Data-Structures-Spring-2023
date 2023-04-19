@@ -12,6 +12,6 @@ void RadixSort(int *arr, int n)
     }
     for (int exp = 1; max / exp > 0; exp *= 10)
     {
-        // CountingSort(arr, n, exp);
+        CountingSort(arr, n, exp);
     }
 }
