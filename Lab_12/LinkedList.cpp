@@ -18,7 +18,7 @@ LinkedList<T>::~LinkedList()
 }
 
 template <class T>
-void LinkedList<T>::AddItem(T *item) // only changes current if inserting to an empty list
+void LinkedList<T>::AddItem(T *item) // inserts at the head every time 
 {
     if (isEmpty())
     { // empty list case
@@ -26,7 +26,7 @@ void LinkedList<T>::AddItem(T *item) // only changes current if inserting to an 
         length++;
         current = head;
     }
-    else if ((*item) < (*head->data))
+    else
     { // head case
         Node<T> *h = new Node<T>(item);
         h->next = head;
@@ -34,31 +34,6 @@ void LinkedList<T>::AddItem(T *item) // only changes current if inserting to an 
         head->prev = h;
         head = h;
         length++;
-    }
-    else
-    { // insert middle and tail cases
-        Node<T> *temp = head;
-        while ((temp->next != nullptr) && ((*temp->next->data) < (*item)))
-        {
-            temp = temp->next;
-        }
-        if (temp->next == nullptr) // tail case
-        {
-            Node<T> *newNode = new Node<T>(item);
-            newNode->next = nullptr;
-            newNode->prev = temp;
-            temp->next = newNode;
-            length++;
-        }
-        else // middle case
-        {
-            Node<T> *newNode = new Node<T>(item);
-            newNode->prev = temp;
-            newNode->next = temp->next;
-            temp->next->prev = newNode;
-            temp->next = newNode;
-            length++;
-        }
     }
 }
 
@@ -253,13 +228,24 @@ void LinkedList<T>::Swap(int i, int j)
     {
         temp1 = temp1->next;
     }
-    for (int k = 0; k < i; k++)
+    for (int k = 0; k < j; k++)
     {
         temp2 = temp2->next;
     }
     T* temp = temp1->data;
     temp1->data = temp2->data;
     temp2->data = temp;
+}
+
+template <class T>
+void LinkedList<T>::Print() {
+    Node<T>* temp = head;
+    while (temp->next != nullptr)
+    {
+        temp->data->Print();
+        temp = temp->next;
+    }
+    temp->data->Print();
 }
 
 template <class T>
@@ -308,6 +294,57 @@ void LinkedList<T>::BubbleSort(int key, bool ascending){
         if (!swapped)
         {
             break;
+        }
+    }
+}
+
+template <class T>
+void LinkedList<T>::InsertionSort(int choicekey, bool ascending)
+{
+    if (isEmpty())
+    {
+        throw EmptyListException();
+    }
+    if (length == 1)
+    {
+        return;
+    }
+    Node<T>* j1;
+    Node<T>* curr;			// i is the index of the current element, j is the index of the previous element, key is the current element
+    T key;
+    int i, j;
+    for (i = 1; i < length; i++)     // start from the second element
+    {
+        curr = head;
+        for (int k = 0; k < i; k++) // set the current element to key
+        {
+            curr = curr->next;
+        }
+        key = *(curr->data);
+
+
+        j = i - 1; // set the previous element to j
+        j1 = head;
+        for (int k = 0; k < j; k++)
+        {
+            j1 = j1->next;
+        }
+
+
+        while (j >= 0 && (j1->data->getData(choicekey) > curr->data->getData(choicekey))) // while the previous element is greater than the current element
+        {
+            j1->next->data = (j1->data); // move the previous element to the right
+            j = j - 1;			 // move j to the left
+            j1 = j1->prev;
+        }
+
+        if (j == -1)
+        {
+            head->data = new T(key);
+        }
+        else
+        {
+            j1->next->data = new T(key); // set the current element to the left of the previous element
         }
     }
 }

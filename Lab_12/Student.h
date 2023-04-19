@@ -1,5 +1,5 @@
 #include <string>
-
+#include <iostream>
 
 using namespace std;
 
@@ -7,11 +7,14 @@ class Student {
 public:
 	string first;
 	string last;
-	int mnumber;
+	long mnumber;
 
 	// Constructor / destructor
-	Student(string first = "test", string last = "name", int mnumber = 0);
+	Student(string f = "test", string l = "name", long m = 0);
+	Student(Student& s);
 	~Student();
 
 	string getData(int key);
+
+	void Print();
 };

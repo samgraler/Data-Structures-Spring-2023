@@ -1,10 +1,9 @@
 #pragma once
-#include <iostream>
 #include <iomanip>
 #include <random>
 #include <time.h>
 #include <chrono>
-#include "LinkedList.h"
+#include <vector>
 #include "LinkedList.cpp"
 #include "Student.h"
 
@@ -633,20 +632,79 @@ void main1()
 	PrintResults(results);
 }
 
+// vector<string> firstNames = {"Emma", "Olivia", "Ava", "Isabella", "Sophia", "Mia", "Charlotte", "Amelia", "Harper", "Evelyn", "Abigail", "Emily", "Elizabeth", "Mila", "Ella", "Avery", "Sofia", "Camila", "Aria", "Scarlett", "Victoria", "Madison", "Luna", "Grace", "Chloe", "Penelope", "Layla", "Riley", "Zoey", "Nora", "Lily", "Eleanor", "Hannah", "Lillian", "Addison", "Aubrey", "Ellie", "Stella", "Natalie", "Zoe", "Leah", "Hazel", "Violet", "Aurora", "Savannah", "Audrey", "Brooklyn", "Bella", "Randy", "Sam"};
+// vector<string> lastNames = {"Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Anderson", "Thomas", "Jackson", "White", "Harris", "Martin", "Thompson", "Garcia", "Martinez", "Robinson", "Clark", "Rodriguez", "Lewis", "Lee", "Walker", "Hall", "Allen", "Young", "King", "Wright", "Scott", "Green", "Baker", "Adams", "Nelson", "Carter", "Mitchell", "Perez", "Roberts", "Turner", "Phillips", "Campbell", "Parker", "Evans", "Edwards", "Collins", "Stewart", "Sanchez", "Morris", "Rogers"};
+
+
+vector<string> firstNames = {"Emma", "Olivia", "Ava", "Isabella", "Sophia"};
+vector<string> lastNames = {"Smith", "Johnson", "Williams", "Jones", "Brown"};
 void main2()
 {
-	LinkedList<Student> *list = new LinkedList<Student>();
+	Student *s;
+	LinkedList<Student>* list = new LinkedList<Student>();
+	for (int i = 0; i < 5; i++)
+	{
+		s = new Student(firstNames[0], lastNames[0], (rand() % 9999999) + 10000000);
+		list->AddItem(s);
+		firstNames.erase(firstNames.begin());
+		lastNames.erase(lastNames.begin());
+	}
+	list->Print();
+	char algorithm, order;
+	int key = 0;
+	cout << "Select the sorting algorithm: " << endl;
+	cout << "(1) Bubble Sort" << endl;
+	cout << "(2) Insertion Sort" << endl;
+	cout << "(3) Quick Sort" << endl;
+	cout << "> ";
+	cin >> algorithm;
+	cout << endl;
+	cout << "Select the key: " << endl;
+	cout << "(1) First Name" << endl;
+	cout << "(2) Last Name" << endl;
+	cout << "(3) MNumber" << endl;
+	cout << "> ";
+	cin >> key;
+	cout << endl;
+	cout << "Select the order: " << endl;
+	cout << "(1) Ascending" << endl;
+	cout << "(2) Descending" << endl;
+	cout << "> ";
+	cin >> order;
 
+	bool ascending = true;
+	if (order == '2')
+	{
+		ascending = false;
+	}
 
+	switch (algorithm)
+	{
+		case '1':
+			list->BubbleSort(key, ascending);
+			break;
+		case '2':
+			list->InsertionSort(key, ascending);
+			break;
+		case '3':
+			//list->QuickSort(key, ascending);
+			break;
+		default:
+			cout << "Invalid choice" << endl;
+			break;
+	}
+
+	// display
+	list->Print();
 }
 
 int main() {
 	string choice = "";
 	while (choice != "3") {
 		cout << "Which driver would you like to run?" << endl;
-		cout << "1. Sorting Algorithms" << endl;
-		cout << "2. LinkedList Sorting" << endl;
-		cout << "3. Exit" << endl;
+		cout << "(1) Sorting Algorithms" << endl;
+		cout << "(2) LinkedList Sorting" << endl;
+		cout << "(3) Exit" << endl;
 		cout << "> ";
 		cin >> choice;
 		cout << endl;

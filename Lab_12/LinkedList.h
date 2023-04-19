@@ -41,8 +41,11 @@ public:
 
     // sorting methods
     void BubbleSort(int key, bool ascending);
-    void InsertionSort(int key, bool ascending);
+    void InsertionSort(int choicekey, bool ascending);
     void QuickSort(int key, bool ascending);
+
+    // print
+    void Print();
 };
 
 #endif
