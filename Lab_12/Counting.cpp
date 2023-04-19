@@ -40,7 +40,7 @@ void CountingSort(int* arr, int n)
 
 void CountingSort(int* arr, int n, int exp)
 {
-    int output[n]; // output array
+    int *output = new int[n]; // output array
     int i, count[10] = { 0 };
  
     // Store count of occurrences in count[]

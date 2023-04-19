@@ -38,6 +38,11 @@ public:
     T* SeeAt(int l);
     T* SeeAt();
     T* GetItem(T* item);
+
+    // sorting methods
+    void BubbleSort(int key, bool ascending);
+    void InsertionSort(int key, bool ascending);
+    void QuickSort(int key, bool ascending);
 };
 
 #endif

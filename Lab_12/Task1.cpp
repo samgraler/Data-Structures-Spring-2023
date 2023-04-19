@@ -3,6 +3,10 @@
 #include <iomanip>
 #include <random>
 #include <time.h>
+#include <chrono>
+#include "LinkedList.h"
+#include "LinkedList.cpp"
+#include "Student.h"
 
 // Sort Function Files
 #include "Bubble.h"
@@ -10,37 +14,54 @@
 #include "Quick.h"
 #include "Merge.h"
 #include "Radix.h" // counting is included in radix
+#include "Heap.h"
 
 using namespace std;
+typedef chrono::high_resolution_clock Clock;
 
-void MakeArrays(int *arr1, int *arr2, int *arr3, int *arr4, int *arr5, int *arr6, int n1, int n2, int n3, int n4, int n5, int n6)
+void MakeArrays(int* arr, int seed, int choice)
 {
-	srand(time(NULL));
-
+	srand(seed);
 	// populate arrays with random numbers
-	for (int i = 0; i < n1; i++)
-	{
-		arr1[i] = rand() % 21;
-	}
-	for (int i = 0; i < n2; i++)
-	{
-		arr2[i] = rand() % 201;
-	}
-	for (int i = 0; i < n3; i++)
-	{
-		arr3[i] = rand() % 1001;
-	}
-	for (int i = 0; i < n4; i++)
-	{
-		arr4[i] = rand() % 10001;
-	}
-	for (int i = 0; i < n5; i++)
-	{
-		arr5[i] = rand() % 50001;
-	}
-	for (int i = 0; i < n6; i++)
-	{
-		arr6[i] = rand() % 100001;
+	switch(choice){
+		case 0:
+			for (int i = 0; i < 10; i++)
+			{
+				arr[i] = rand() % 21;
+			}
+			break;
+		case 1:
+			for (int i = 0; i < 100; i++)
+			{
+				arr[i] = rand() % 201;
+			}
+			break;
+		case 2:
+			for (int i = 0; i < 500; i++)
+			{
+				arr[i] = rand() % 1001;
+			}
+			break;
+		case 3:
+			for (int i = 0; i < 5000; i++)
+			{
+				arr[i] = rand() % 10001;
+			}
+			break;
+		case 4:
+			for (int i = 0; i < 25000; i++)
+			{
+				arr[i] = rand() % 50001;
+			}
+			break;
+		case 5:
+			for (int i = 0; i < 100000; i++)
+			{
+				arr[i] = rand() % 200001;
+			}
+			break;
+		default:
+			break;
 	}
 }
 
@@ -51,258 +72,596 @@ void PrintArray(int *arr, int n)
 	{
 		cout << arr[i] << " ";
 	}
-	cout << endl;
+	
 }
 
-void TimeTaken(int *arr, int n, int sortType)
+void PrintResults(long long arr[7][6])
 {
-	clock_t start, end;
-	start = clock();
-	switch (sortType)
-	{
-	case 1:
-		BubbleSort(arr, n);
-		break;
-	case 2:
-		InsertionSort(arr, n);
-		break;
-	case 3:
-		QuickSort(arr, 0, n - 1);
-		break;
-	case 4:
-		MergeSort(arr, 0, n - 1);
-		break;
-	case 5:
-		CountingSort(arr, n);
-		break;
-	case 6:
-		RadixSort(arr, n);
-		break;
-	default:
-		cout << "Invalid Sort Type" << endl;
-		break;
-	}
-	end = clock();
-	cout << "Time taken to sort " << n << " elements: " << (end - start) / (double)CLOCKS_PER_SEC << " seconds" << endl;
-}
+	cout << "Time in Nanoseconds" << endl;
+	cout << "Sizes:\t"  << "\t";
+	for (int j = 0; j < 6; j++) {
+			switch (j) {
+			case 0:
+				cout << "10\t";
+				break;
+			case 1:
+				cout << "100\t";
+				break;
+			case 2:
+				cout << "500\t";
+				break;
+			case 3:
+				cout << "5000\t\t";
+				break;
+			case 4:
+				cout << "25000\t\t";
+				break;
+			case 5:
+				cout << "100000\t\t";
+				break;
+			default:
+				break;
+			}
+		}
+	cout << endl << endl;
+	for (int i = 0; i < 7; i++) {
 
-int main()
-{
-	// initialize arrays to be sorted
-	int arr1[10];
-	int arr2[100];
-	int arr3[500];
-	int arr4[5000];
-	int arr5[25000];
-	int arr6[100000];
-
-	// // populate arrays with random numbers
-	// MakeArrays(arr1, arr2, arr3, arr4, arr5, arr6, 10, 100, 500, 5000, 25000, 100000);
-
-	// // Bubble Sort Arrays and print time taken to sort each array
-	// cout << "Bubble Sort:" << endl; // Finished Bubble Sort
-	// for (int i = 0; i < 6; i++)
-	// {
-	// 	cout << "Array " << i + 1 << ": ";
-	// 	switch (i)
-	// 	{
-	// 	case 0:
-	// 		TimeTaken(arr1, 10, 1);
-	// 		break;
-	// 	case 1:
-	// 		TimeTaken(arr2, 100, 1);
-	// 		break;
-	// 	case 2:
-	// 		TimeTaken(arr3, 500, 1);
-	// 		break;
-	// 	case 3:
-	// 		TimeTaken(arr4, 5000, 1);
-	// 		break;
-	// 	case 4:
-	// 		TimeTaken(arr5, 25000, 1);
-	// 		break;
-	// 	case 5:
-	// 		TimeTaken(arr6, 100000, 1);
-	// 		break;
-	// 	default:
-	// 		cout << "Invalid Array" << endl;
-	// 		break;
-	// 	}
-	// }
-
-	// cout << endl;
-
-	// MakeArrays(arr1, arr2, arr3, arr4, arr5, arr6, 10, 100, 500, 5000, 25000, 100000);
-
-	// cout << "Insertion Sort:" << endl; // Finished Insertion Sort
-	// for (int i = 0; i < 6; i++) 
-	// {
-	// 	cout << "Array " << i + 1 << ": ";
-	// 	switch (i)
-	// 	{
-	// 	case 0:
-	// 		TimeTaken(arr1, 10, 2);
-	// 		break;
-	// 	case 1:
-	// 		TimeTaken(arr2, 100, 2);
-	// 		break;
-	// 	case 2:
-	// 		TimeTaken(arr3, 500, 2);
-	// 		break;
-	// 	case 3:
-	// 		TimeTaken(arr4, 5000, 2);
-	// 		break;
-	// 	case 4:
-	// 		TimeTaken(arr5, 25000, 2);
-	// 		break;
-	// 	case 5:
-	// 		TimeTaken(arr6, 100000, 2);
-	// 		break;
-	// 	default:
-	// 		cout << "Invalid Array" << endl;
-	// 		break;
-	// 	}
-	// }
-
-	// cout << endl;
-
-	// MakeArrays(arr1, arr2, arr3, arr4, arr5, arr6, 10, 100, 500, 5000, 25000, 100000);
-
-	// cout << "Quick Sort:" << endl; // Finished Quick Sort
-	// for (int i = 0; i < 6; i++)
-	// {
-	// 	cout << "Array " << i + 1 << ": ";
-	// 	switch (i)
-	// 	{
-	// 	case 0:
-	// 		cout << endl;
-	// 		TimeTaken(arr1, 10, 3);
-	// 		break;
-	// 	case 1:
-	// 		TimeTaken(arr2, 100, 3);
-	// 		break;
-	// 	case 2:
-	// 		TimeTaken(arr3, 500, 3);
-	// 		break;
-	// 	case 3:
-	// 		TimeTaken(arr4, 5000, 3);
-	// 		break;
-	// 	case 4:
-	// 		TimeTaken(arr5, 25000, 3);
-	// 		break;
-	// 	case 5:
-	// 		TimeTaken(arr6, 100000, 3);
-	// 		break;
-	// 	default:
-	// 		cout << "Invalid Array" << endl;
-	// 		break;
-	// 	}
-	// }
-
-	// cout << endl;
-
-	// MakeArrays(arr1, arr2, arr3, arr4, arr5, arr6, 10, 100, 500, 5000, 25000, 100000);
-
-	// cout << "Merge Sort:" << endl; // Finished Merge Sort
-	// for (int i = 0; i < 6; i++)
-	// {
-	// 	cout << "Array " << i + 1 << ": ";
-	// 	switch (i)
-	// 	{
-	// 	case 0:
-	// 		cout << endl;
-	// 		TimeTaken(arr1, 10, 4);
-	// 		break;
-	// 	case 1:
-	// 		TimeTaken(arr2, 100, 4);
-	// 		break;
-	// 	case 2:
-	// 		TimeTaken(arr3, 500, 4);
-	// 		break;
-	// 	case 3:
-	// 		TimeTaken(arr4, 5000, 4);
-	// 		break;
-	// 	case 4:
-	// 		TimeTaken(arr5, 25000, 4);
-	// 		break;
-	// 	case 5:
-	// 		TimeTaken(arr6, 100000, 4);
-	// 		break;
-	// 	default:
-	// 		cout << "Invalid Array" << endl;
-	// 		break;
-	// 	}
-	// }
-
-	// cout << endl;
-
-	// MakeArrays(arr1, arr2, arr3, arr4, arr5, arr6, 10, 100, 500, 5000, 25000, 100000);
-
-	// cout << "Counting Sort" << endl; // Finished Counting Sort
-	// for (int i = 0; i < 6; i++)
-	// {
-	// 	cout << "Array " << i + 1 << ": ";
-	// 	switch (i)
-	// 	{
-	// 	case 0:
-	// 		TimeTaken(arr1, 10, 5);
-	// 		break;
-	// 	case 1:
-	// 		TimeTaken(arr2, 100, 5);
-	// 		break;
-	// 	case 2:
-	// 		TimeTaken(arr3, 500, 5);
-	// 		break;
-	// 	case 3:
-	// 		TimeTaken(arr4, 5000, 5);
-	// 		break;
-	// 	case 4:
-	// 		TimeTaken(arr5, 25000, 5);
-	// 		break;
-	// 	case 5:
-	// 		TimeTaken(arr6, 100000, 5);
-	// 		break;
-	// 	default:
-	// 		cout << "Invalid Array" << endl;
-	// 		break;
-	// 	}
-	// }
-
-	// cout << endl;
-
-	MakeArrays(arr1, arr2, arr3, arr4, arr5, arr6, 10, 100, 500, 5000, 25000, 100000);
-
-	cout << "Radix Sort" << endl;
-	for (int i = 0; i < 1; i++)
-	{
-		cout << "Array " << i + 1 << ": ";
-		switch (i)
-		{
+		switch (i) {
 		case 0:
-			PrintArray(arr1, 10);
-			TimeTaken(arr1, 10, 6);
-			PrintArray(arr1, 10);
+			cout << "Bubble Sort: " << "\t";
 			break;
 		case 1:
-			TimeTaken(arr2, 100, 6);
+			cout << "Insert Sort: " << "\t";
 			break;
 		case 2:
-			TimeTaken(arr3, 500, 6);
+			cout << "Quick Sort: " << "\t";
 			break;
-		case 3:
-			TimeTaken(arr4, 5000, 6);
-			break;
+		case 3:	
+			cout << "Merge Sort: " << "\t";
+			break;	
 		case 4:
-			TimeTaken(arr5, 25000, 6);
+			cout << "Count Sort: " << "\t";
 			break;
 		case 5:
-			TimeTaken(arr6, 100000, 6);
+			cout << "Radix Sort: " << "\t";
+			break;
+		case 6:
+			cout << "Heap Sort: " << "\t";
 			break;
 		default:
-			cout << "Invalid Array" << endl;
 			break;
+		}
+		for (int j = 0; j < 6; j++) {
+			cout << arr[i][j] << "\t";
+			if (j > 2 && arr[i][j] < 9999999) {
+				cout << "\t";
+			}
+		}
+		cout << endl;
+	}
+}
+
+auto Bubble(int* arr, int n)
+{
+	auto t1 = Clock::now();
+	BubbleSort(arr, n);
+	auto t2 = Clock::now();
+	return(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count());
+}
+
+auto Insertion(int* arr, int n)
+{
+	auto t1 = Clock::now();
+	InsertionSort(arr, n);
+	auto t2 = Clock::now();
+	return(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count());
+}
+
+auto Quick(int* arr, int n)
+{
+	
+	auto t1 = Clock::now();
+	QuickSort(arr, 0, n - 1);
+	auto t2 = Clock::now();
+	return(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count());
+}
+
+auto Merge(int* arr, int n)
+{
+	auto t1 = Clock::now();
+	MergeSort(arr, 0, n - 1);
+	auto t2 = Clock::now();
+	return(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count());
+}
+
+auto Count(int* arr, int n)
+{
+	
+	auto t1 = Clock::now();
+	CountingSort(arr, n);
+	auto t2 = Clock::now();
+	return(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count());
+}
+
+auto Radix(int* arr, int n)
+{
+	
+	auto t1 = Clock::now();
+	RadixSort(arr, n);
+	auto t2 = Clock::now();
+	return(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count());
+}
+
+auto Heap(int* arr, int n)
+{
+	
+	auto t1 = Clock::now();
+	HeapSort(arr, n);
+	auto t2 = Clock::now();
+	return(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count());
+}
+
+void main1()
+{
+	// initialize arrays to be sorted
+	int *arr1 = new int[10];
+	int *arr2 = new int[100];
+	int *arr3 = new int[500];
+	int *arr4 = new int[5000];
+	int *arr5 = new int[25000];
+	int *arr6 = new int[100000];
+
+	long long results[7][6] = { 0 };
+
+	int seed = time(NULL);
+	long long averagetime = 0;
+
+	// Bubble Sort Arrays and print time taken to sort each array
+	for (int i = 0; i < 6; i++)
+	{
+		averagetime = 0;
+		switch (i)
+		{
+			case 0:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr1, seed, 0);
+					averagetime += Bubble(arr1, 10);
+				}
+				results[0][0] = averagetime / 10;
+				break;
+			case 1:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr2, seed, 1);
+					averagetime += Bubble(arr2, 100);
+				}
+				results[0][1] = averagetime / 10;
+				break;
+			case 2:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr3, seed, 2);
+					averagetime += Bubble(arr3, 500);
+				}
+				results[0][2] = averagetime / 10;
+				break;
+			case 3:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr4, seed, 3);
+					averagetime += Bubble(arr4, 5000);
+				}
+				results[0][3] = averagetime / 10;
+				break;
+			case 4:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr5, seed, 4);
+					averagetime += Bubble(arr5, 25000);
+				}
+				results[0][4] = averagetime / 10;
+				break;
+			case 5:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr6, seed, 5);
+					averagetime += Bubble(arr6, 100000);
+				}
+				results[0][5] = averagetime / 10;
+				break;
+			default:
+				cout << "Invalid Array" << endl;
+				break;
 		}
 	}
 
+	for (int i = 0; i < 6; i++) 
+	{
+	averagetime = 0;
+	switch (i)
+	{
+	case 0:
+		for (int i = 0; i < 11; i++)
+		{
+			MakeArrays(arr1, seed, 0);
+			averagetime += Insertion(arr1, 10);
+		}
+		results[1][0] = averagetime / 10;
+		break;
+	case 1:
+		for (int i = 0; i < 11; i++)
+		{
+			MakeArrays(arr2, seed, 1);
+			averagetime += Insertion(arr2, 100);
+		}
+		results[1][1] = averagetime / 10;
+		break;
+	case 2:
+		for (int i = 0; i < 11; i++)
+		{
+			MakeArrays(arr3, seed, 2);
+			averagetime += Insertion(arr3, 500);
+		}
+		results[1][2] = averagetime / 10;
+		break;
+	case 3:
+		for (int i = 0; i < 11; i++)
+		{
+			MakeArrays(arr4, seed, 3);
+			averagetime += Insertion(arr4, 5000);
+		}
+		results[1][3] = averagetime / 10;
+		break;
+	case 4:
+		for (int i = 0; i < 11; i++)
+		{
+			MakeArrays(arr5, seed, 4);
+			averagetime += Insertion(arr5, 25000);
+		}
+		results[1][4] = averagetime / 10;
+		break;
+	case 5:
+		for (int i = 0; i < 11; i++)
+		{
+			MakeArrays(arr6, seed, 5);
+			averagetime += Insertion(arr6, 100000);
+		}
+		results[1][5] = averagetime / 10;
+		break;
+	default:
+		cout << "Invalid Array" << endl;
+		break;
+	}
+	}
+
+	 for (int i = 0; i < 6; i++)
+	 {
+		averagetime = 0;
+	 	switch (i)
+	 	{
+	 	case 0:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr1, seed, 0);
+					averagetime += Quick(arr1, 10);
+				}
+				results[2][0] = averagetime / 10;
+				break;
+			case 1:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr2, seed, 1);
+					averagetime += Quick(arr2, 100);
+				}
+				results[2][1] = averagetime / 10;
+				break;
+			case 2:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr3, seed, 2);
+					averagetime += Quick(arr3, 500);
+				}
+				results[2][2] = averagetime / 10;
+				break;
+			case 3:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr4, seed, 3);
+					averagetime += Quick(arr4, 5000);
+				}
+				results[2][3] = averagetime / 10;
+				break;
+			case 4:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr5, seed, 4);
+					averagetime += Quick(arr5, 25000);
+				}
+				results[2][4] = averagetime / 10;
+				break;
+			case 5:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr6, seed, 5);
+					averagetime += Quick(arr6, 100000);
+				}
+				results[2][5] = averagetime / 10;
+				break;
+			default:
+				cout << "Invalid Array" << endl;
+				break;
+	 	}
+	 }
+
+	for (int i = 0; i < 6; i++)
+	{
+		averagetime = 0;
+		switch (i)
+		{
+		case 0:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr1, seed, 0);
+					averagetime += Merge(arr1, 10);
+				}
+				results[3][0] = averagetime / 10;
+				break;
+			case 1:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr2, seed, 1);
+					averagetime += Merge(arr2, 100);
+				}
+				results[3][1] = averagetime / 10;
+				break;
+			case 2:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr3, seed, 2);
+					averagetime += Merge(arr3, 500);
+				}
+				results[3][2] = averagetime / 10;
+				break;
+			case 3:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr4, seed, 3);
+					averagetime += Merge(arr4, 5000);
+				}
+				results[3][3] = averagetime / 10;
+				break;
+			case 4:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr5, seed, 4);
+					averagetime += Merge(arr5, 25000);
+				}
+				results[3][4] = averagetime / 10;
+				break;
+			case 5:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr6, seed, 5);
+					averagetime += Merge(arr6, 100000);
+				}
+				results[3][5] = averagetime / 10;
+				break;
+			default:
+				cout << "Invalid Array" << endl;
+				break;
+		}
+	}
+
+	for (int i = 0; i < 6; i++)
+	{
+		averagetime = 0;
+		switch (i)
+		{
+		case 0:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr1, seed, 0);
+					averagetime += Count(arr1, 10);
+				}
+				results[4][0] = averagetime / 10;
+				break;
+			case 1:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr2, seed, 1);
+					averagetime += Count(arr2, 100);
+				}
+				results[4][1] = averagetime / 10;
+				break;
+			case 2:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr3, seed, 2);
+					averagetime += Count(arr3, 500);
+				}
+				results[4][2] = averagetime / 10;
+				break;
+			case 3:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr4, seed, 3);
+					averagetime += Count(arr4, 5000);
+				}
+				results[4][3] = averagetime / 10;
+				break;
+			case 4:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr5, seed, 4);
+					averagetime += Count(arr5, 25000);
+				}
+				results[4][4] = averagetime / 10;
+				break;
+			case 5:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr6, seed, 5);
+					averagetime += Count(arr6, 100000);
+				}
+				results[4][5] = averagetime / 10;
+				break;
+			default:
+				cout << "Invalid Array" << endl;
+				break;
+		}
+	}
+
+	for (int i = 0; i < 6; i++)
+	{
+		averagetime = 0;
+		switch (i)
+		{
+		case 0:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr1, seed, 0);
+					averagetime += Radix(arr1, 10);
+				}
+				results[5][0] = averagetime / 10;
+				break;
+			case 1:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr2, seed, 1);
+					averagetime += Radix(arr2, 100);
+				}
+				results[5][1] = averagetime / 10;
+				break;
+			case 2:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr3, seed, 2);
+					averagetime += Radix(arr3, 500);
+				}
+				results[5][2] = averagetime / 10;
+				break;
+			case 3:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr4, seed, 3);
+					averagetime += Radix(arr4, 5000);
+				}
+				results[5][3] = averagetime / 10;
+				break;
+			case 4:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr5, seed, 4);
+					averagetime += Radix(arr5, 25000);
+				}
+				results[5][4] = averagetime / 10;
+				break;
+			case 5:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr6, seed, 5);
+					averagetime += Radix(arr6, 100000);
+				}
+				results[5][5] = averagetime / 10;
+				break;
+			default:
+				cout << "Invalid Array" << endl;
+				break;
+		}
+	}
+
+	for (int i = 0; i < 6; i++)
+	{
+		averagetime = 0;
+		switch (i)
+		{
+		case 0:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr1, seed, 0);
+					averagetime += Heap(arr1, 10);
+				}
+				results[6][0] = averagetime / 10;
+				break;
+			case 1:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr2, seed, 1);
+					averagetime += Heap(arr2, 100);
+				}
+				results[6][1] = averagetime / 10;
+				break;
+			case 2:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr3, seed, 2);
+					averagetime += Heap(arr3, 500);
+				}
+				results[6][2] = averagetime / 10;
+				break;
+			case 3:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr4, seed, 3);
+					averagetime += Heap(arr4, 5000);
+				}
+				results[6][3] = averagetime / 10;
+				break;
+			case 4:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr5, seed, 4);
+					averagetime += Heap(arr5, 25000);
+				}
+				results[6][4] = averagetime / 10;
+				break;
+			case 5:
+				for (int i = 0; i < 11; i++)
+				{
+					MakeArrays(arr6, seed, 5);
+					averagetime += Heap(arr6, 100000);
+				}
+				results[6][5] = averagetime / 10;
+				break;
+			default:
+				cout << "Invalid Array" << endl;
+				break;
+		}
+	}
+
+	PrintResults(results);
+}
+
+void main2()
+{
+	LinkedList<Student> *list = new LinkedList<Student>();
+
+
+}
+
+int main() {
+	string choice = "";
+	while (choice != "3") {
+		cout << "Which driver would you like to run?" << endl;
+		cout << "1. Sorting Algorithms" << endl;
+		cout << "2. LinkedList Sorting" << endl;
+		cout << "3. Exit" << endl;
+		cout << "> ";
+		cin >> choice;
+		cout << endl;
+		if (choice == "1") {
+			main1();
+		}
+		else if (choice == "2") {
+			main2();
+		}
+		else if (choice == "3") {
+			return 0;
+		}
+		else {
+			cout << "Invalid choice" << endl;
+		}
+	}
 	return 0;
 }

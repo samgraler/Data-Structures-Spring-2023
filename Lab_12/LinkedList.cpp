@@ -261,3 +261,53 @@ void LinkedList<T>::Swap(int i, int j)
     temp1->data = temp2->data;
     temp2->data = temp;
 }
+
+template <class T>
+void LinkedList<T>::BubbleSort(int key, bool ascending){
+    if (isEmpty())
+    {
+        throw EmptyListException();
+    }
+    if (length == 1)
+    {
+        return;
+    }
+    bool swapped;
+    for (int i = 0; i < length; i++)
+    {
+        swapped = false;
+        for (int j = 0; j < length - i - 1; j++)
+        {
+            Node<T>* temp1 = head;
+            Node<T>* temp2 = head;
+            for (int k = 0; k < j; k++)
+            {
+                temp1 = temp1->next;
+            }
+            for (int k = 0; k < j + 1; k++)
+            {
+                temp2 = temp2->next;
+            }
+            if (temp1->data->getData(key) > temp2->data->getData(key))
+            {
+                if (ascending)
+                {
+                    Swap(j, j + 1);
+                    swapped = true;
+                }
+            }
+            else
+            {
+                if (!ascending)
+                {
+					Swap(j, j + 1);
+                    swapped = true;
+				}
+            }
+        }
+        if (!swapped)
+        {
+            break;
+        }
+    }
+}
