@@ -14,7 +14,9 @@ public:
 	Student(Student& s);
 	~Student();
 
+	// getter to return a specific attribute based on the key
 	string getData(int key);
 
+	// print function
 	void Print();
 };

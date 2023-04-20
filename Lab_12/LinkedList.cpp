@@ -401,6 +401,7 @@ void LinkedList<T>::heapify(int N, int i, int key, bool ascending)
 		root = root->next;
 	}
 
+    // set left child
     int l = 2 * i + 1;
     Node<T> *left = head;
     if (l < N)
@@ -410,7 +411,8 @@ void LinkedList<T>::heapify(int N, int i, int key, bool ascending)
             left = left->next;
         }
     }
- 
+    
+    // set right cild
     int r = 2 * i + 2;
     Node<T> *right = head;
     if (r < N)
@@ -421,6 +423,7 @@ void LinkedList<T>::heapify(int N, int i, int key, bool ascending)
 		}
     }
     
+    // compare root to left and right child
     if (ascending)
     {
         if (l < N && (left->data->getData(key) > root->data->getData(key)))
@@ -460,8 +463,9 @@ void LinkedList<T>::heapify(int N, int i, int key, bool ascending)
 		}
     }
 
+    // if the root changed, swap and heapify the affected subtree
     if (rootindex != i) { // if root is not i (original root)
         Swap(i, rootindex);
-        heapify(N, rootindex, key, ascending); // heapify the subtree
+        heapify(N, rootindex, key, ascending); 
     }
 }

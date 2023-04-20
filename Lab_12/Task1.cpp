@@ -21,7 +21,7 @@ typedef chrono::high_resolution_clock Clock;
 void MakeArrays(int* arr, int seed, int choice)
 {
 	srand(seed);
-	// populate arrays with random numbers
+	// populate given array with random numbers accoring to the size of the array (indicated by choice)
 	switch(choice){
 		case 0:
 			for (int i = 0; i < 10; i++)
@@ -64,7 +64,7 @@ void MakeArrays(int* arr, int seed, int choice)
 	}
 }
 
-// Function to print array
+// Function to print an array
 void PrintArray(int *arr, int n)
 {
 	for (int i = 0; i < n; i++)
@@ -74,6 +74,7 @@ void PrintArray(int *arr, int n)
 	
 }
 
+// print the 2d array that holds the times
 void PrintResults(long long arr[7][6])
 {
 	cout << "Time in Nanoseconds" << endl;
@@ -140,6 +141,7 @@ void PrintResults(long long arr[7][6])
 	}
 }
 
+// function to call / time bubble sort
 auto Bubble(int* arr, int n)
 {
 	auto t1 = Clock::now();
@@ -148,6 +150,7 @@ auto Bubble(int* arr, int n)
 	return(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count());
 }
 
+// function to call / time insertion sort
 auto Insertion(int* arr, int n)
 {
 	auto t1 = Clock::now();
@@ -156,6 +159,7 @@ auto Insertion(int* arr, int n)
 	return(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count());
 }
 
+// function to call / time quick sort
 auto Quick(int* arr, int n)
 {
 	
@@ -165,6 +169,7 @@ auto Quick(int* arr, int n)
 	return(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count());
 }
 
+// function to call / time merge sort
 auto Merge(int* arr, int n)
 {
 	auto t1 = Clock::now();
@@ -173,6 +178,7 @@ auto Merge(int* arr, int n)
 	return(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count());
 }
 
+// function to call / time counting sort
 auto Count(int* arr, int n)
 {
 	
@@ -182,6 +188,7 @@ auto Count(int* arr, int n)
 	return(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count());
 }
 
+// function to call / time radix sort
 auto Radix(int* arr, int n)
 {
 	
@@ -191,6 +198,7 @@ auto Radix(int* arr, int n)
 	return(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count());
 }
 
+// function to call / time heap sort
 auto Heap(int* arr, int n)
 {
 	
@@ -200,6 +208,7 @@ auto Heap(int* arr, int n)
 	return(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count());
 }
 
+// DRIVER FOR TASK 1
 void main1()
 {
 	// initialize arrays to be sorted
@@ -215,19 +224,19 @@ void main1()
 	int seed = time(NULL);
 	long long averagetime = 0;
 
-	// Bubble Sort Arrays and print time taken to sort each array
+	// loop through each array size and call bubble sort 10 times on each size to get an average time for each size
 	for (int i = 0; i < 6; i++)
 	{
 		averagetime = 0;
 		switch (i)
 		{
 			case 0:
-				for (int i = 0; i < 11; i++)
+				for (int i = 0; i < 11; i++) // each for loop opertes in the same format
 				{
-					MakeArrays(arr1, seed, 0);
-					averagetime += Bubble(arr1, 10);
+					MakeArrays(arr1, seed, 0); // populate the array with random values to be sorted
+					averagetime += Bubble(arr1, 10); // call the respective sort function one time and add the time to the running count
 				}
-				results[0][0] = averagetime / 10;
+				results[0][0] = averagetime / 10; // calculate the average and store it in a 2D array
 				break;
 			case 1:
 				for (int i = 0; i < 11; i++)
@@ -275,71 +284,73 @@ void main1()
 		}
 	}
 
+	// loop through each array size and call insertion sort 10 times on each size to get an average time for each size
 	for (int i = 0; i < 6; i++) 
 	{
-	averagetime = 0;
-	switch (i)
-	{
-	case 0:
-		for (int i = 0; i < 11; i++)
-		{
-			MakeArrays(arr1, seed, 0);
-			averagetime += Insertion(arr1, 10);
-		}
-		results[1][0] = averagetime / 10;
-		break;
-	case 1:
-		for (int i = 0; i < 11; i++)
-		{
-			MakeArrays(arr2, seed, 1);
-			averagetime += Insertion(arr2, 100);
-		}
-		results[1][1] = averagetime / 10;
-		break;
-	case 2:
-		for (int i = 0; i < 11; i++)
-		{
-			MakeArrays(arr3, seed, 2);
-			averagetime += Insertion(arr3, 500);
-		}
-		results[1][2] = averagetime / 10;
-		break;
-	case 3:
-		for (int i = 0; i < 11; i++)
-		{
-			MakeArrays(arr4, seed, 3);
-			averagetime += Insertion(arr4, 5000);
-		}
-		results[1][3] = averagetime / 10;
-		break;
-	case 4:
-		for (int i = 0; i < 11; i++)
-		{
-			MakeArrays(arr5, seed, 4);
-			averagetime += Insertion(arr5, 25000);
-		}
-		results[1][4] = averagetime / 10;
-		break;
-	case 5:
-		for (int i = 0; i < 11; i++)
-		{
-			MakeArrays(arr6, seed, 5);
-			averagetime += Insertion(arr6, 100000);
-		}
-		results[1][5] = averagetime / 10;
-		break;
-	default:
-		cout << "Invalid Array" << endl;
-		break;
-	}
-	}
-
-	 for (int i = 0; i < 6; i++)
-	 {
 		averagetime = 0;
-	 	switch (i)
-	 	{
-	 	case 0:
+		switch (i)
+		{
+		case 0:
+			for (int i = 0; i < 11; i++)
+			{
+				MakeArrays(arr1, seed, 0);
+				averagetime += Insertion(arr1, 10);
+			}
+			results[1][0] = averagetime / 10;
+			break;
+		case 1:
+			for (int i = 0; i < 11; i++)
+			{
+				MakeArrays(arr2, seed, 1);
+				averagetime += Insertion(arr2, 100);
+			}
+			results[1][1] = averagetime / 10;
+			break;
+		case 2:
+			for (int i = 0; i < 11; i++)
+			{
+				MakeArrays(arr3, seed, 2);
+				averagetime += Insertion(arr3, 500);
+			}
+			results[1][2] = averagetime / 10;
+			break;
+		case 3:
+			for (int i = 0; i < 11; i++)
+			{
+				MakeArrays(arr4, seed, 3);
+				averagetime += Insertion(arr4, 5000);
+			}
+			results[1][3] = averagetime / 10;
+			break;
+		case 4:
+			for (int i = 0; i < 11; i++)
+			{
+				MakeArrays(arr5, seed, 4);
+				averagetime += Insertion(arr5, 25000);
+			}
+			results[1][4] = averagetime / 10;
+			break;
+		case 5:
+			for (int i = 0; i < 11; i++)
+			{
+				MakeArrays(arr6, seed, 5);
+				averagetime += Insertion(arr6, 100000);
+			}
+			results[1][5] = averagetime / 10;
+			break;
+		default:
+			cout << "Invalid Array" << endl;
+			break;
+		}
+	}
+	
+	// loop through each array size and call quick sort 10 times on each size to get an average time for each size
+	for (int i = 0; i < 6; i++)
+	{
+		averagetime = 0;
+		switch (i)
+		{
+			case 0:
 				for (int i = 0; i < 11; i++)
 				{
 					MakeArrays(arr1, seed, 0);
@@ -390,9 +401,10 @@ void main1()
 			default:
 				cout << "Invalid Array" << endl;
 				break;
-	 	}
-	 }
+		}
+	}
 
+	// loop through each array size and call merge sort 10 times on each size to get an average time for each size
 	for (int i = 0; i < 6; i++)
 	{
 		averagetime = 0;
@@ -451,7 +463,7 @@ void main1()
 				break;
 		}
 	}
-
+	 // loop through each array size and call counting sort 10 times on each size to get an average time for each size
 	for (int i = 0; i < 6; i++)
 	{
 		averagetime = 0;
@@ -511,6 +523,7 @@ void main1()
 		}
 	}
 
+	// loop through each array size and call radix sort 10 times on each size to get an average time for each size
 	for (int i = 0; i < 6; i++)
 	{
 		averagetime = 0;
@@ -569,7 +582,7 @@ void main1()
 				break;
 		}
 	}
-
+	 // loop through each array size and call heap sort 10 times on each size to get an average time for each size
 	for (int i = 0; i < 6; i++)
 	{
 		averagetime = 0;
@@ -629,18 +642,20 @@ void main1()
 		}
 	}
 
+	// output results
 	PrintResults(results);
 }
 
- 
+// DRIVER FOR TASK 3 
 void main2()
 {
+	// initialize vectors that hold names for the students
 	vector<string> firstNames = { "Emma", "Olivia", "Ava", "Isabella", "Sophia", "Mia", "Charlotte", "Amelia", "Harper", "Evelyn", "Abigail", "Emily", "Elizabeth", "Mila", "Ella", "Avery", "Sofia", "Camila", "Aria", "Scarlett", "Victoria", "Madison", "Luna", "Grace", "Chloe", "Penelope", "Layla", "Riley", "Zoey", "Nora", "Lily", "Eleanor", "Hannah", "Lillian", "Addison", "Aubrey", "Ellie", "Stella", "Natalie", "Zoe", "Leah", "Hazel", "Violet", "Aurora", "Savannah", "Audrey", "Brooklyn", "Bella", "Randy", "Sam" };
 	vector<string> lastNames = { "Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Anderson", "Thomas", "Jackson", "White", "Harris", "Martin", "Thompson", "Garcia", "Martinez", "Robinson", "Clark", "Rodriguez", "Lewis", "Lee", "Walker", "Hall", "Allen", "Young", "King", "Wright", "Scott", "Green", "Baker", "Adams", "Nelson", "Carter", "Mitchell", "Perez", "Roberts", "Turner", "Phillips", "Campbell", "Parker", "Evans", "Edwards", "Collins", "Stewart", "Sanchez", "Morris", "Rogers" };
 
 	Student *s;
 	LinkedList<Student>* list = new LinkedList<Student>();
-	for (int i = 0; i < 50; i++)
+	for (int i = 0; i < 50; i++) // create 50 students with the names from the vectors and a random mnumber 
 	{
 		s = new Student(firstNames[0], lastNames[0], (rand() % 9999999) + 10000000);
 		list->AddItem(s);
@@ -648,9 +663,11 @@ void main2()
 		lastNames.erase(lastNames.begin());
 	}
 
+	// output the original (unsorted) list
 	cout << "Unsorted List: " << endl;
 	list->Print();
 
+	// get the user input for the sorting algorithm, key, and order
 	char algorithm, order;
 	int key = 0;
 	cout << "Select the sorting algorithm: " << endl;
@@ -678,7 +695,7 @@ void main2()
 	{
 		ascending = false;
 	}
-
+	// call the proper sort with the right key and ascending order
 	switch (algorithm)
 	{
 		case '1':
@@ -694,26 +711,26 @@ void main2()
 			cout << "Invalid choice" << endl;
 			break;
 	}
-
+	// output the sorted version of the list
 	cout << endl << "Sorted List: " << endl;
 	list->Print();
 }
 
 int main() {
 	string choice = "";
-	while (choice != "3") {
+	while (choice != "3") { // ask the use whether they want to test task 1 or task 3
 		cout << "Which driver would you like to run?" << endl;
-		cout << "(1) Sorting Algorithms" << endl;
-		cout << "(2) LinkedList Sorting" << endl;
+		cout << "(1) Sorting Algorithms" << endl; // task 1
+		cout << "(2) LinkedList Sorting" << endl; // task 3
 		cout << "(3) Exit" << endl;
 		cout << "> ";
 		cin >> choice;
 		cout << endl;
 		if (choice == "1") {
-			main1();
+			main1(); // run task 1 driver
 		}
 		else if (choice == "2") {
-			main2();
+			main2(); // run task 2 driver
 		}
 		else if (choice == "3") {
 			return 0;

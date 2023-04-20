@@ -19,6 +19,7 @@ Student::~Student()
 	
 }
 
+// helper function to return the specific key asked for by the sorting algorithms in the main (passed to the linked list sorting functions, then passed to this function)
 string Student::getData(int key)
 {
 	if (key == 1)
@@ -35,6 +36,7 @@ string Student::getData(int key)
 	}
 }
 
+// print function to print the student's information
 void Student::Print()
 {
 	cout << "First Name: " << first << "\t";
