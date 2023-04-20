@@ -246,6 +246,7 @@ void LinkedList<T>::Print() {
         temp = temp->next;
     }
     temp->data->Print();
+    cout << endl;
 }
 
 template <class T>
@@ -381,7 +382,6 @@ void LinkedList<T>::HeapSort(int key, bool ascending)
     {
         heapify(length, i, key, ascending);
     }
-    Print();
     cout << endl;
     for (int i = length - 1; i > 0; i--) {
         Swap(0, i); // Move current root to end (index 0 is the max/min value)

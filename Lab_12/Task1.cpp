@@ -647,7 +647,10 @@ void main2()
 		firstNames.erase(firstNames.begin());
 		lastNames.erase(lastNames.begin());
 	}
+
+	cout << "Unsorted List: " << endl;
 	list->Print();
+
 	char algorithm, order;
 	int key = 0;
 	cout << "Select the sorting algorithm: " << endl;
@@ -692,7 +695,7 @@ void main2()
 			break;
 	}
 
-	// display
+	cout << endl << "Sorted List: " << endl;
 	list->Print();
 }
 

@@ -37,5 +37,15 @@ string Student::getData(int key)
 
 void Student::Print()
 {
-	cout << "First Name: " << first << " Last Name: " << last << " MNumber: " << mnumber << endl;
+	cout << "First Name: " << first << "\t";
+	if (first.length() < 4)
+	{
+		cout << "\t";
+	}
+	cout << "Last Name: " << last << "\t";
+	if (last.length() < 5)
+	{
+		cout << "\t";
+	} 
+	cout << "MNumber: " << mnumber << endl;
 }
