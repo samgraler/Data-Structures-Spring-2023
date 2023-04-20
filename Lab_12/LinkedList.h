@@ -44,6 +44,8 @@ public:
     void InsertionSort(int choicekey, bool ascending);
     void QuickSort(int key, bool ascending);
 
+    Node<T>* operator[](int index);
+
     // print
     void Print();
 };

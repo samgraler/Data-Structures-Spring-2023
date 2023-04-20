@@ -249,6 +249,25 @@ void LinkedList<T>::Print() {
 }
 
 template <class T>
+Node<T>* LinkedList<T>::operator[](int index)
+{
+    if (index >= length)
+    {
+		throw EndOfListException();
+	}
+    if (isEmpty())
+    {
+		throw EmptyListException();
+	}
+	Node<T>* temp = head;
+    for (int i = 0; i < index; i++)
+    {
+		temp = temp->next;
+	}
+	return *temp;
+}
+
+template <class T>
 void LinkedList<T>::BubbleSort(int key, bool ascending){
     if (isEmpty())
     {
@@ -311,7 +330,7 @@ void LinkedList<T>::InsertionSort(int choicekey, bool ascending)
     }
     Node<T>* j1;
     Node<T>* curr;			// i is the index of the current element, j is the index of the previous element, key is the current element
-    T key;
+    T *key;
     int i, j;
     for (i = 1; i < length; i++)     // start from the second element
     {
@@ -320,7 +339,7 @@ void LinkedList<T>::InsertionSort(int choicekey, bool ascending)
         {
             curr = curr->next;
         }
-        key = *(curr->data);
+        key = curr->data;
 
 
         j = i - 1; // set the previous element to j
@@ -330,21 +349,29 @@ void LinkedList<T>::InsertionSort(int choicekey, bool ascending)
             j1 = j1->next;
         }
 
-
-        while (j >= 0 && (j1->data->getData(choicekey) > curr->data->getData(choicekey))) // while the previous element is greater than the current element
-        {
-            j1->next->data = (j1->data); // move the previous element to the right
-            j = j - 1;			 // move j to the left
-            j1 = j1->prev;
+        if (ascending) {
+            while (j >= 0 && (j1->data->getData(choicekey) > key->getData(choicekey))) // while the previous element is greater than the current element
+            {
+                j1->next->data = (j1->data); // move the previous element to the right
+                j = j - 1;			 // move j to the left
+                j1 = j1->prev;
+            }
         }
-
+        else {
+            while (j >= 0 && (j1->data->getData(choicekey) < key->getData(choicekey))) // while the previous element is greater than the current element
+            {
+                j1->next->data = (j1->data); // move the previous element to the right
+                j = j - 1;			 // move j to the left
+                j1 = j1->prev;
+            }
+        }
         if (j == -1)
         {
-            head->data = new T(key);
+            head->data = key;
         }
         else
         {
-            j1->next->data = new T(key); // set the current element to the left of the previous element
+            j1->next->data = key; // set the current element to the left of the previous element
         }
     }
 }
