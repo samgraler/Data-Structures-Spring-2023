@@ -18,45 +18,61 @@
 using namespace std;
 typedef chrono::high_resolution_clock Clock;
 
-void MakeArrays(int* arr, int seed, int choice)
+void MakeArrays(int* arr, int choice)
 {
-	srand(seed);
+	std::random_device rd;
+	std::mt19937 mt(rd());
+	std::uniform_real_distribution<double> dist;
 	// populate given array with random numbers accoring to the size of the array (indicated by choice)
+	if (choice == 0)
+		std::uniform_real_distribution<double> dist(1, std::nextafter(20, DBL_MAX));
+	else if (choice == 1)
+		std::uniform_real_distribution<double> dist(1, std::nextafter(200, DBL_MAX));
+	else if (choice == 2)
+		std::uniform_real_distribution<double> dist(1, std::nextafter(1000, DBL_MAX));
+	else if (choice == 3)
+		std::uniform_real_distribution<double> dist(1, std::nextafter(10000, DBL_MAX));
+	else if (choice == 4)
+		std::uniform_real_distribution<double> dist(1, std::nextafter(50000, DBL_MAX));
+	else
+		std::uniform_real_distribution<double> dist(1, std::nextafter(200000, DBL_MAX));
+	
 	switch(choice){
 		case 0:
 			for (int i = 0; i < 10; i++)
 			{
-				arr[i] = rand() % 21;
+				double x = dist(mt);
+				arr[i] = int(x);
 			}
 			break;
 		case 1:
 			for (int i = 0; i < 100; i++)
 			{
-				arr[i] = rand() % 201;
+				arr[i] = int(dist(mt));
 			}
 			break;
 		case 2:
 			for (int i = 0; i < 500; i++)
 			{
-				arr[i] = rand() % 1001;
+				arr[i] = int(dist(mt));
 			}
 			break;
 		case 3:
 			for (int i = 0; i < 5000; i++)
 			{
-				arr[i] = rand() % 10001;
+				arr[i] = int(dist(mt));
 			}
 			break;
 		case 4:
 			for (int i = 0; i < 25000; i++)
 			{
-				arr[i] = rand() % 50001;
+				arr[i] = int(dist(mt));
 			}
 			break;
 		case 5:
 			for (int i = 0; i < 100000; i++)
 			{
-				arr[i] = rand() % 200001;
+				arr[i] = int(dist(mt));
 			}
 			break;
 		default:
@@ -225,7 +241,7 @@ void main1()
 	long long averagetime = 0;
 
 	// loop through each array size and call bubble sort 10 times on each size to get an average time for each size
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		averagetime = 0;
 		switch (i)
@@ -233,7 +249,7 @@ void main1()
 			case 0:
 				for (int i = 0; i < 11; i++) // each for loop opertes in the same format
 				{
-					MakeArrays(arr1, seed, 0); // populate the array with random values to be sorted
+					MakeArrays(arr1, 0); // populate the array with random values to be sorted
 					averagetime += Bubble(arr1, 10); // call the respective sort function one time and add the time to the running count
 				}
 				results[0][0] = averagetime / 10; // calculate the average and store it in a 2D array
@@ -241,7 +257,7 @@ void main1()
 			case 1:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr2, seed, 1);
+					MakeArrays(arr2, 1);
 					averagetime += Bubble(arr2, 100);
 				}
 				results[0][1] = averagetime / 10;
@@ -249,7 +265,7 @@ void main1()
 			case 2:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr3, seed, 2);
+					MakeArrays(arr3, 2);
 					averagetime += Bubble(arr3, 500);
 				}
 				results[0][2] = averagetime / 10;
@@ -257,7 +273,7 @@ void main1()
 			case 3:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr4, seed, 3);
+					MakeArrays(arr4, 3);
 					averagetime += Bubble(arr4, 5000);
 				}
 				results[0][3] = averagetime / 10;
@@ -265,7 +281,7 @@ void main1()
 			case 4:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr5, seed, 4);
+					MakeArrays(arr5, 4);
 					averagetime += Bubble(arr5, 25000);
 				}
 				results[0][4] = averagetime / 10;
@@ -273,7 +289,7 @@ void main1()
 			case 5:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr6, seed, 5);
+					MakeArrays(arr6, 5);
 					averagetime += Bubble(arr6, 100000);
 				}
 				results[0][5] = averagetime / 10;
@@ -285,7 +301,7 @@ void main1()
 	}
 
 	// loop through each array size and call insertion sort 10 times on each size to get an average time for each size
-	for (int i = 0; i < 6; i++) 
+	for (int i = 0; i < 3; i++) 
 	{
 		averagetime = 0;
 		switch (i)
@@ -293,7 +309,7 @@ void main1()
 		case 0:
 			for (int i = 0; i < 11; i++)
 			{
-				MakeArrays(arr1, seed, 0);
+				MakeArrays(arr1, 0);
 				averagetime += Insertion(arr1, 10);
 			}
 			results[1][0] = averagetime / 10;
@@ -301,7 +317,7 @@ void main1()
 		case 1:
 			for (int i = 0; i < 11; i++)
 			{
-				MakeArrays(arr2, seed, 1);
+				MakeArrays(arr2, 1);
 				averagetime += Insertion(arr2, 100);
 			}
 			results[1][1] = averagetime / 10;
@@ -309,7 +325,7 @@ void main1()
 		case 2:
 			for (int i = 0; i < 11; i++)
 			{
-				MakeArrays(arr3, seed, 2);
+				MakeArrays(arr3, 2);
 				averagetime += Insertion(arr3, 500);
 			}
 			results[1][2] = averagetime / 10;
@@ -317,7 +333,7 @@ void main1()
 		case 3:
 			for (int i = 0; i < 11; i++)
 			{
-				MakeArrays(arr4, seed, 3);
+				MakeArrays(arr4, 3);
 				averagetime += Insertion(arr4, 5000);
 			}
 			results[1][3] = averagetime / 10;
@@ -325,7 +341,7 @@ void main1()
 		case 4:
 			for (int i = 0; i < 11; i++)
 			{
-				MakeArrays(arr5, seed, 4);
+				MakeArrays(arr5, 4);
 				averagetime += Insertion(arr5, 25000);
 			}
 			results[1][4] = averagetime / 10;
@@ -333,7 +349,7 @@ void main1()
 		case 5:
 			for (int i = 0; i < 11; i++)
 			{
-				MakeArrays(arr6, seed, 5);
+				MakeArrays(arr6, 5);
 				averagetime += Insertion(arr6, 100000);
 			}
 			results[1][5] = averagetime / 10;
@@ -353,7 +369,7 @@ void main1()
 			case 0:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr1, seed, 0);
+					MakeArrays(arr1, 0);
 					averagetime += Quick(arr1, 10);
 				}
 				results[2][0] = averagetime / 10;
@@ -361,7 +377,7 @@ void main1()
 			case 1:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr2, seed, 1);
+					MakeArrays(arr2, 1);
 					averagetime += Quick(arr2, 100);
 				}
 				results[2][1] = averagetime / 10;
@@ -369,7 +385,7 @@ void main1()
 			case 2:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr3, seed, 2);
+					MakeArrays(arr3, 2);
 					averagetime += Quick(arr3, 500);
 				}
 				results[2][2] = averagetime / 10;
@@ -377,7 +393,7 @@ void main1()
 			case 3:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr4, seed, 3);
+					MakeArrays(arr4, 3);
 					averagetime += Quick(arr4, 5000);
 				}
 				results[2][3] = averagetime / 10;
@@ -385,7 +401,7 @@ void main1()
 			case 4:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr5, seed, 4);
+					MakeArrays(arr5, 4);
 					averagetime += Quick(arr5, 25000);
 				}
 				results[2][4] = averagetime / 10;
@@ -393,7 +409,7 @@ void main1()
 			case 5:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr6, seed, 5);
+					MakeArrays(arr6, 5);
 					averagetime += Quick(arr6, 100000);
 				}
 				results[2][5] = averagetime / 10;
@@ -413,7 +429,7 @@ void main1()
 		case 0:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr1, seed, 0);
+					MakeArrays(arr1, 0);
 					averagetime += Merge(arr1, 10);
 				}
 				results[3][0] = averagetime / 10;
@@ -421,7 +437,7 @@ void main1()
 			case 1:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr2, seed, 1);
+					MakeArrays(arr2, 1);
 					averagetime += Merge(arr2, 100);
 				}
 				results[3][1] = averagetime / 10;
@@ -429,7 +445,7 @@ void main1()
 			case 2:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr3, seed, 2);
+					MakeArrays(arr3, 2);
 					averagetime += Merge(arr3, 500);
 				}
 				results[3][2] = averagetime / 10;
@@ -437,7 +453,7 @@ void main1()
 			case 3:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr4, seed, 3);
+					MakeArrays(arr4, 3);
 					averagetime += Merge(arr4, 5000);
 				}
 				results[3][3] = averagetime / 10;
@@ -445,7 +461,7 @@ void main1()
 			case 4:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr5, seed, 4);
+					MakeArrays(arr5, 4);
 					averagetime += Merge(arr5, 25000);
 				}
 				results[3][4] = averagetime / 10;
@@ -453,7 +469,7 @@ void main1()
 			case 5:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr6, seed, 5);
+					MakeArrays(arr6, 5);
 					averagetime += Merge(arr6, 100000);
 				}
 				results[3][5] = averagetime / 10;
@@ -472,7 +488,7 @@ void main1()
 		case 0:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr1, seed, 0);
+					MakeArrays(arr1, 0);
 					averagetime += Count(arr1, 10);
 				}
 				results[4][0] = averagetime / 10;
@@ -480,7 +496,7 @@ void main1()
 			case 1:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr2, seed, 1);
+					MakeArrays(arr2, 1);
 					averagetime += Count(arr2, 100);
 				}
 				results[4][1] = averagetime / 10;
@@ -488,7 +504,7 @@ void main1()
 			case 2:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr3, seed, 2);
+					MakeArrays(arr3, 2);
 					averagetime += Count(arr3, 500);
 				}
 				results[4][2] = averagetime / 10;
@@ -496,7 +512,7 @@ void main1()
 			case 3:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr4, seed, 3);
+					MakeArrays(arr4, 3);
 					averagetime += Count(arr4, 5000);
 				}
 				results[4][3] = averagetime / 10;
@@ -504,7 +520,7 @@ void main1()
 			case 4:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr5, seed, 4);
+					MakeArrays(arr5, 4);
 					averagetime += Count(arr5, 25000);
 				}
 				results[4][4] = averagetime / 10;
@@ -512,7 +528,7 @@ void main1()
 			case 5:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr6, seed, 5);
+					MakeArrays(arr6, 5);
 					averagetime += Count(arr6, 100000);
 				}
 				results[4][5] = averagetime / 10;
@@ -532,7 +548,7 @@ void main1()
 		case 0:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr1, seed, 0);
+					MakeArrays(arr1, 0);
 					averagetime += Radix(arr1, 10);
 				}
 				results[5][0] = averagetime / 10;
@@ -540,7 +556,7 @@ void main1()
 			case 1:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr2, seed, 1);
+					MakeArrays(arr2, 1);
 					averagetime += Radix(arr2, 100);
 				}
 				results[5][1] = averagetime / 10;
@@ -548,7 +564,7 @@ void main1()
 			case 2:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr3, seed, 2);
+					MakeArrays(arr3, 2);
 					averagetime += Radix(arr3, 500);
 				}
 				results[5][2] = averagetime / 10;
@@ -556,7 +572,7 @@ void main1()
 			case 3:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr4, seed, 3);
+					MakeArrays(arr4, 3);
 					averagetime += Radix(arr4, 5000);
 				}
 				results[5][3] = averagetime / 10;
@@ -564,7 +580,7 @@ void main1()
 			case 4:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr5, seed, 4);
+					MakeArrays(arr5, 4);
 					averagetime += Radix(arr5, 25000);
 				}
 				results[5][4] = averagetime / 10;
@@ -572,7 +588,7 @@ void main1()
 			case 5:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr6, seed, 5);
+					MakeArrays(arr6, 5);
 					averagetime += Radix(arr6, 100000);
 				}
 				results[5][5] = averagetime / 10;
@@ -591,7 +607,7 @@ void main1()
 		case 0:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr1, seed, 0);
+					MakeArrays(arr1, 0);
 					averagetime += Heap(arr1, 10);
 				}
 				results[6][0] = averagetime / 10;
@@ -599,7 +615,7 @@ void main1()
 			case 1:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr2, seed, 1);
+					MakeArrays(arr2, 1);
 					averagetime += Heap(arr2, 100);
 				}
 				results[6][1] = averagetime / 10;
@@ -607,7 +623,7 @@ void main1()
 			case 2:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr3, seed, 2);
+					MakeArrays(arr3, 2);
 					averagetime += Heap(arr3, 500);
 				}
 				results[6][2] = averagetime / 10;
@@ -615,7 +631,7 @@ void main1()
 			case 3:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr4, seed, 3);
+					MakeArrays(arr4, 3);
 					averagetime += Heap(arr4, 5000);
 				}
 				results[6][3] = averagetime / 10;
@@ -623,7 +639,7 @@ void main1()
 			case 4:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr5, seed, 4);
+					MakeArrays(arr5, 4);
 					averagetime += Heap(arr5, 25000);
 				}
 				results[6][4] = averagetime / 10;
@@ -631,7 +647,7 @@ void main1()
 			case 5:
 				for (int i = 0; i < 11; i++)
 				{
-					MakeArrays(arr6, seed, 5);
+					MakeArrays(arr6, 5);
 					averagetime += Heap(arr6, 100000);
 				}
 				results[6][5] = averagetime / 10;
@@ -649,6 +665,9 @@ void main1()
 // DRIVER FOR TASK 3 
 void main2()
 {
+	std::random_device rd;
+	std::mt19937 mt(rd());
+	std::uniform_real_distribution<double> dist(10000000, std::nextafter(99999999, DBL_MAX));
 	// initialize vectors that hold names for the students
 	vector<string> firstNames = { "Emma", "Olivia", "Ava", "Isabella", "Sophia", "Mia", "Charlotte", "Amelia", "Harper", "Evelyn", "Abigail", "Emily", "Elizabeth", "Mila", "Ella", "Avery", "Sofia", "Camila", "Aria", "Scarlett", "Victoria", "Madison", "Luna", "Grace", "Chloe", "Penelope", "Layla", "Riley", "Zoey", "Nora", "Lily", "Eleanor", "Hannah", "Lillian", "Addison", "Aubrey", "Ellie", "Stella", "Natalie", "Zoe", "Leah", "Hazel", "Violet", "Aurora", "Savannah", "Audrey", "Brooklyn", "Bella", "Randy", "Sam" };
 	vector<string> lastNames = { "Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Anderson", "Thomas", "Jackson", "White", "Harris", "Martin", "Thompson", "Garcia", "Martinez", "Robinson", "Clark", "Rodriguez", "Lewis", "Lee", "Walker", "Hall", "Allen", "Young", "King", "Wright", "Scott", "Green", "Baker", "Adams", "Nelson", "Carter", "Mitchell", "Perez", "Roberts", "Turner", "Phillips", "Campbell", "Parker", "Evans", "Edwards", "Collins", "Stewart", "Sanchez", "Morris", "Rogers" };
@@ -657,7 +676,7 @@ void main2()
 	LinkedList<Student>* list = new LinkedList<Student>();
 	for (int i = 0; i < 50; i++) // create 50 students with the names from the vectors and a random mnumber 
 	{
-		s = new Student(firstNames[0], lastNames[0], (rand() % 9999999) + 10000000);
+		s = new Student(firstNames[0], lastNames[0], int(dist(mt)));
 		list->AddItem(s);
 		firstNames.erase(firstNames.begin());
 		lastNames.erase(lastNames.begin());
