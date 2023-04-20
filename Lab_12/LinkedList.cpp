@@ -340,15 +340,12 @@ void LinkedList<T>::InsertionSort(int choicekey, bool ascending)
             curr = curr->next;
         }
         key = curr->data;
-
-
         j = i - 1; // set the previous element to j
         j1 = head;
         for (int k = 0; k < j; k++)
         {
             j1 = j1->next;
         }
-
         if (ascending) {
             while (j >= 0 && (j1->data->getData(choicekey) > key->getData(choicekey))) // while the previous element is greater than the current element
             {
@@ -373,5 +370,98 @@ void LinkedList<T>::InsertionSort(int choicekey, bool ascending)
         {
             j1->next->data = key; // set the current element to the left of the previous element
         }
+    }
+}
+
+template <class T>
+void LinkedList<T>::HeapSort(int key, bool ascending)
+{
+    // Build heap (rearrange list)
+    for (int i = length / 2 - 1; i >= 0; i--)
+    {
+        heapify(length, i, key, ascending);
+    }
+    Print();
+    cout << endl;
+    for (int i = length - 1; i > 0; i--) {
+        Swap(0, i); // Move current root to end (index 0 is the max/min value)
+        heapify(i, 0, key, ascending); // fix heap and continue 
+    }
+}
+
+// heapify a subtree with node i as the root (array size n)
+template <class T>
+void LinkedList<T>::heapify(int N, int i, int key, bool ascending)
+{
+    // Initialize root
+    int rootindex = i;
+    Node<T>* root = head;
+    for (int k = 0; k < i; k++)
+    {
+		root = root->next;
+	}
+
+    int l = 2 * i + 1;
+    Node<T> *left = head;
+    if (l < N)
+    {
+        for (int k = 0; k < 2 * i + 1; k++)
+        {
+            left = left->next;
+        }
+    }
+ 
+    int r = 2 * i + 2;
+    Node<T> *right = head;
+    if (r < N)
+    {
+        for (int k = 0; k < 2 * i + 2; k++)
+        {
+			right = right->next;
+		}
+    }
+    
+    if (ascending)
+    {
+        if (l < N && (left->data->getData(key) > root->data->getData(key)))
+        {
+            rootindex = l;
+        }
+        if (rootindex != i) // if left child changed root, update root
+        {
+            root = head;
+            for (int k = 0; k < rootindex; k++)
+            {
+                root = root->next;
+            }
+        }
+        if (r < N && (right->data->getData(key) > root->data->getData(key)))
+        {
+            rootindex = r;
+        }
+    }
+    else
+    {
+        if (l < N && (left->data->getData(key) < root->data->getData(key)))
+        {
+			rootindex = l;
+		}
+        if (rootindex != i) // if left child changed root, update root
+        {
+            root = head;
+            for (int k = 0; k < rootindex; k++)
+            {
+                root = root->next;
+            }
+        }
+        if (r < N && (right->data->getData(key) < root->data->getData(key)))
+        {
+			rootindex = r;
+		}
+    }
+
+    if (rootindex != i) { // if root is not i (original root)
+        Swap(i, rootindex);
+        heapify(N, rootindex, key, ascending); // heapify the subtree
     }
 }

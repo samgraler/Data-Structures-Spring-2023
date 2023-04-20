@@ -653,7 +653,7 @@ void main2()
 	cout << "Select the sorting algorithm: " << endl;
 	cout << "(1) Bubble Sort" << endl;
 	cout << "(2) Insertion Sort" << endl;
-	cout << "(3) Quick Sort" << endl;
+	cout << "(3) Heap Sort" << endl;
 	cout << "> ";
 	cin >> algorithm;
 	cout << endl;
@@ -685,7 +685,7 @@ void main2()
 			list->InsertionSort(key, ascending);
 			break;
 		case '3':
-			//list->QuickSort(key, ascending);
+			list->HeapSort(key, ascending);
 			break;
 		default:
 			cout << "Invalid choice" << endl;

@@ -42,7 +42,8 @@ public:
     // sorting methods
     void BubbleSort(int key, bool ascending);
     void InsertionSort(int choicekey, bool ascending);
-    void QuickSort(int key, bool ascending);
+    void HeapSort(int key, bool ascending);
+    void heapify(int N, int i, int key, bool ascending);
 
     Node<T>* operator[](int index);
 
